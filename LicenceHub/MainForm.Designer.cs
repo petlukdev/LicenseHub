@@ -111,7 +111,7 @@
             // 
             // toolStripButton1
             // 
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.Image = LicenseHub.Properties.Resources.PlusIcon;
             toolStripButton1.ImageTransparentColor = Color.Magenta;
             toolStripButton1.Name = "toolStripButton1";
             toolStripButton1.Size = new Size(81, 35);
@@ -119,7 +119,7 @@
             // 
             // toolStripButton2
             // 
-            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
+            toolStripButton2.Image = LicenseHub.Properties.Resources.PenIcon;
             toolStripButton2.ImageTransparentColor = Color.Magenta;
             toolStripButton2.Name = "toolStripButton2";
             toolStripButton2.Size = new Size(65, 35);
@@ -127,7 +127,7 @@
             // 
             // toolStripButton3
             // 
-            toolStripButton3.Image = (Image)resources.GetObject("toolStripButton3.Image");
+            toolStripButton3.Image = LicenseHub.Properties.Resources.BinIcon;
             toolStripButton3.ImageTransparentColor = Color.Magenta;
             toolStripButton3.Name = "toolStripButton3";
             toolStripButton3.Size = new Size(60, 35);
@@ -154,7 +154,7 @@
             tabPage1.Padding = new Padding(3);
             tabPage1.Size = new Size(768, 324);
             tabPage1.TabIndex = 0;
-            tabPage1.Text = "Licences";
+            tabPage1.Text = "Licenses";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // groupBox2
@@ -596,8 +596,9 @@
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
-            Text = "LicenceHub";
+            Text = "LicenseHub";
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             tabControl1.ResumeLayout(false);
