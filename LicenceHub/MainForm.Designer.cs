@@ -117,6 +117,7 @@
             btnAddEntry.Name = "btnAddEntry";
             btnAddEntry.Size = new Size(100, 48);
             btnAddEntry.Text = "New Entry";
+            btnAddEntry.Click += AddEntryEvent;
             // 
             // btnModifyEntry
             // 
