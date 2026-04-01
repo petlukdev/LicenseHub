@@ -11,7 +11,7 @@ namespace LicenceHub
 
         private void AddEntryEvent(object sender, EventArgs e)
         {
-            LicenseForm form = new LicenseForm();
+            Form form = new OwnerForm();
             form.ShowDialog();
         }
     }

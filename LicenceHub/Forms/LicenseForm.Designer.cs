@@ -45,9 +45,9 @@
             comboSupplier = new ComboBox();
             btnAddOwner = new Button();
             btnAddSupplier = new Button();
+            txtKey = new TextBox();
             btnApply = new Button();
             btnCancel = new Button();
-            txtKey = new TextBox();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numPrice).BeginInit();
             SuspendLayout();
@@ -104,9 +104,9 @@
             label2.AutoSize = true;
             label2.Location = new Point(3, 46);
             label2.Name = "label2";
-            label2.Size = new Size(86, 46);
+            label2.Size = new Size(88, 46);
             label2.TabIndex = 1;
-            label2.Text = "License key:";
+            label2.Text = "License Key:";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label3
@@ -115,9 +115,9 @@
             label3.AutoSize = true;
             label3.Location = new Point(3, 92);
             label3.Name = "label3";
-            label3.Size = new Size(93, 46);
+            label3.Size = new Size(95, 46);
             label3.TabIndex = 2;
-            label3.Text = "License type:";
+            label3.Text = "License Type:";
             label3.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label4
@@ -137,9 +137,9 @@
             label5.AutoSize = true;
             label5.Location = new Point(3, 184);
             label5.Name = "label5";
-            label5.Size = new Size(113, 46);
+            label5.Size = new Size(115, 46);
             label5.TabIndex = 4;
-            label5.Text = "Expiration date:";
+            label5.Text = "Expiration Date:";
             label5.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label6
@@ -203,6 +203,7 @@
             // comboOwner
             // 
             comboOwner.Anchor = AnchorStyles.Right;
+            comboOwner.DropDownStyle = ComboBoxStyle.DropDownList;
             comboOwner.FormattingEnabled = true;
             comboOwner.Location = new Point(153, 239);
             comboOwner.Name = "comboOwner";
@@ -212,6 +213,7 @@
             // comboSupplier
             // 
             comboSupplier.Anchor = AnchorStyles.Right;
+            comboSupplier.DropDownStyle = ComboBoxStyle.DropDownList;
             comboSupplier.FormattingEnabled = true;
             comboSupplier.Location = new Point(153, 287);
             comboSupplier.Name = "comboSupplier";
@@ -238,6 +240,14 @@
             btnAddSupplier.Text = "+";
             btnAddSupplier.UseVisualStyleBackColor = true;
             // 
+            // txtKey
+            // 
+            txtKey.Anchor = AnchorStyles.Right;
+            txtKey.Location = new Point(153, 55);
+            txtKey.Name = "txtKey";
+            txtKey.Size = new Size(250, 27);
+            txtKey.TabIndex = 17;
+            // 
             // btnApply
             // 
             btnApply.Location = new Point(136, 345);
@@ -256,14 +266,6 @@
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
             // 
-            // txtKey
-            // 
-            txtKey.Anchor = AnchorStyles.Right;
-            txtKey.Location = new Point(153, 55);
-            txtKey.Name = "txtKey";
-            txtKey.Size = new Size(250, 27);
-            txtKey.TabIndex = 17;
-            // 
             // LicenseForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -272,7 +274,7 @@
             Controls.Add(btnCancel);
             Controls.Add(btnApply);
             Controls.Add(tableLayoutPanel1);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "LicenseForm";
             Text = "Add/Modify License";
