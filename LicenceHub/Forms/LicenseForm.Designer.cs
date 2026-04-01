@@ -37,19 +37,19 @@
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
-            textBox1 = new TextBox();
-            comboBox1 = new ComboBox();
-            numericUpDown1 = new NumericUpDown();
-            dateTimePicker1 = new DateTimePicker();
-            comboBox2 = new ComboBox();
-            comboBox3 = new ComboBox();
-            maskedTextBox1 = new MaskedTextBox();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
+            txtTitle = new TextBox();
+            comboType = new ComboBox();
+            numPrice = new NumericUpDown();
+            datePicker = new DateTimePicker();
+            comboOwner = new ComboBox();
+            comboSupplier = new ComboBox();
+            btnAddOwner = new Button();
+            btnAddSupplier = new Button();
+            btnApply = new Button();
+            btnCancel = new Button();
+            txtKey = new TextBox();
             tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numPrice).BeginInit();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -65,15 +65,15 @@
             tableLayoutPanel1.Controls.Add(label5, 0, 4);
             tableLayoutPanel1.Controls.Add(label6, 0, 5);
             tableLayoutPanel1.Controls.Add(label7, 0, 6);
-            tableLayoutPanel1.Controls.Add(textBox1, 1, 0);
-            tableLayoutPanel1.Controls.Add(comboBox1, 1, 2);
-            tableLayoutPanel1.Controls.Add(numericUpDown1, 1, 3);
-            tableLayoutPanel1.Controls.Add(dateTimePicker1, 1, 4);
-            tableLayoutPanel1.Controls.Add(comboBox2, 1, 5);
-            tableLayoutPanel1.Controls.Add(comboBox3, 1, 6);
-            tableLayoutPanel1.Controls.Add(maskedTextBox1, 1, 1);
-            tableLayoutPanel1.Controls.Add(button1, 2, 5);
-            tableLayoutPanel1.Controls.Add(button2, 2, 6);
+            tableLayoutPanel1.Controls.Add(txtTitle, 1, 0);
+            tableLayoutPanel1.Controls.Add(comboType, 1, 2);
+            tableLayoutPanel1.Controls.Add(numPrice, 1, 3);
+            tableLayoutPanel1.Controls.Add(datePicker, 1, 4);
+            tableLayoutPanel1.Controls.Add(comboOwner, 1, 5);
+            tableLayoutPanel1.Controls.Add(comboSupplier, 1, 6);
+            tableLayoutPanel1.Controls.Add(btnAddOwner, 2, 5);
+            tableLayoutPanel1.Controls.Add(btnAddSupplier, 2, 6);
+            tableLayoutPanel1.Controls.Add(txtKey, 1, 1);
             tableLayoutPanel1.Location = new Point(12, 12);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 7;
@@ -164,110 +164,113 @@
             label7.Text = "Supplier:";
             label7.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // txtTitle
             // 
-            textBox1.Anchor = AnchorStyles.Right;
-            textBox1.Location = new Point(278, 9);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 7;
+            txtTitle.Anchor = AnchorStyles.Right;
+            txtTitle.Location = new Point(153, 9);
+            txtTitle.Name = "txtTitle";
+            txtTitle.Size = new Size(250, 27);
+            txtTitle.TabIndex = 7;
             // 
-            // comboBox1
+            // comboType
             // 
-            comboBox1.Anchor = AnchorStyles.Right;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(252, 97);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 9;
+            comboType.Anchor = AnchorStyles.Right;
+            comboType.FormattingEnabled = true;
+            comboType.Location = new Point(153, 101);
+            comboType.Name = "comboType";
+            comboType.Size = new Size(250, 28);
+            comboType.TabIndex = 9;
             // 
-            // numericUpDown1
+            // numPrice
             // 
-            numericUpDown1.Anchor = AnchorStyles.Right;
-            numericUpDown1.Location = new Point(253, 144);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(150, 27);
-            numericUpDown1.TabIndex = 10;
+            numPrice.Anchor = AnchorStyles.Right;
+            numPrice.Location = new Point(153, 147);
+            numPrice.Name = "numPrice";
+            numPrice.Size = new Size(250, 27);
+            numPrice.TabIndex = 10;
             // 
-            // dateTimePicker1
+            // datePicker
             // 
-            dateTimePicker1.Anchor = AnchorStyles.Right;
-            dateTimePicker1.Location = new Point(153, 190);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(250, 27);
-            dateTimePicker1.TabIndex = 11;
+            datePicker.Anchor = AnchorStyles.Right;
+            datePicker.Format = DateTimePickerFormat.Short;
+            datePicker.Location = new Point(153, 193);
+            datePicker.MinDate = new DateTime(1950, 1, 1, 0, 0, 0, 0);
+            datePicker.Name = "datePicker";
+            datePicker.Size = new Size(250, 27);
+            datePicker.TabIndex = 11;
+            datePicker.Value = new DateTime(2026, 4, 1, 10, 40, 24, 0);
             // 
-            // comboBox2
+            // comboOwner
             // 
-            comboBox2.Anchor = AnchorStyles.Right;
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(252, 235);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(151, 28);
-            comboBox2.TabIndex = 12;
+            comboOwner.Anchor = AnchorStyles.Right;
+            comboOwner.FormattingEnabled = true;
+            comboOwner.Location = new Point(153, 239);
+            comboOwner.Name = "comboOwner";
+            comboOwner.Size = new Size(250, 28);
+            comboOwner.TabIndex = 12;
             // 
-            // comboBox3
+            // comboSupplier
             // 
-            comboBox3.Anchor = AnchorStyles.Right;
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(252, 284);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(151, 28);
-            comboBox3.TabIndex = 13;
+            comboSupplier.Anchor = AnchorStyles.Right;
+            comboSupplier.FormattingEnabled = true;
+            comboSupplier.Location = new Point(153, 287);
+            comboSupplier.Name = "comboSupplier";
+            comboSupplier.Size = new Size(250, 28);
+            comboSupplier.TabIndex = 13;
             // 
-            // maskedTextBox1
+            // btnAddOwner
             // 
-            maskedTextBox1.Anchor = AnchorStyles.Right;
-            maskedTextBox1.Location = new Point(278, 55);
-            maskedTextBox1.Name = "maskedTextBox1";
-            maskedTextBox1.Size = new Size(125, 27);
-            maskedTextBox1.TabIndex = 14;
+            btnAddOwner.Anchor = AnchorStyles.Left;
+            btnAddOwner.Location = new Point(409, 238);
+            btnAddOwner.Name = "btnAddOwner";
+            btnAddOwner.Size = new Size(29, 29);
+            btnAddOwner.TabIndex = 15;
+            btnAddOwner.Text = "+";
+            btnAddOwner.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnAddSupplier
             // 
-            button1.Anchor = AnchorStyles.Left;
-            button1.Location = new Point(409, 238);
-            button1.Name = "button1";
-            button1.Size = new Size(29, 29);
-            button1.TabIndex = 15;
-            button1.Text = "+";
-            button1.UseVisualStyleBackColor = true;
+            btnAddSupplier.Anchor = AnchorStyles.Left;
+            btnAddSupplier.Location = new Point(409, 287);
+            btnAddSupplier.Name = "btnAddSupplier";
+            btnAddSupplier.Size = new Size(29, 29);
+            btnAddSupplier.TabIndex = 16;
+            btnAddSupplier.Text = "+";
+            btnAddSupplier.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnApply
             // 
-            button2.Anchor = AnchorStyles.Left;
-            button2.Location = new Point(409, 287);
-            button2.Name = "button2";
-            button2.Size = new Size(29, 29);
-            button2.TabIndex = 16;
-            button2.Text = "+";
-            button2.UseVisualStyleBackColor = true;
+            btnApply.Location = new Point(136, 345);
+            btnApply.Name = "btnApply";
+            btnApply.Size = new Size(94, 29);
+            btnApply.TabIndex = 1;
+            btnApply.Text = "Apply";
+            btnApply.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnCancel
             // 
-            button3.Location = new Point(136, 345);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 1;
-            button3.Text = "Apply";
-            button3.UseVisualStyleBackColor = true;
+            btnCancel.Location = new Point(236, 345);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(94, 29);
+            btnCancel.TabIndex = 2;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // txtKey
             // 
-            button4.Location = new Point(236, 345);
-            button4.Name = "button4";
-            button4.Size = new Size(94, 29);
-            button4.TabIndex = 2;
-            button4.Text = "Cancel";
-            button4.UseVisualStyleBackColor = true;
+            txtKey.Anchor = AnchorStyles.Right;
+            txtKey.Location = new Point(153, 55);
+            txtKey.Name = "txtKey";
+            txtKey.Size = new Size(250, 27);
+            txtKey.TabIndex = 17;
             // 
             // LicenseForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(465, 384);
-            Controls.Add(button4);
-            Controls.Add(button3);
+            ClientSize = new Size(465, 383);
+            Controls.Add(btnCancel);
+            Controls.Add(btnApply);
             Controls.Add(tableLayoutPanel1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -275,7 +278,7 @@
             Text = "Add/Modify License";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numPrice).EndInit();
             ResumeLayout(false);
         }
 
@@ -289,16 +292,16 @@
         private Label label5;
         private Label label6;
         private Label label7;
-        private TextBox textBox1;
-        private ComboBox comboBox1;
-        private NumericUpDown numericUpDown1;
-        private DateTimePicker dateTimePicker1;
-        private ComboBox comboBox2;
-        private ComboBox comboBox3;
-        private MaskedTextBox maskedTextBox1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
+        private TextBox txtTitle;
+        private ComboBox comboType;
+        private NumericUpDown numPrice;
+        private DateTimePicker datePicker;
+        private ComboBox comboOwner;
+        private ComboBox comboSupplier;
+        private Button btnAddOwner;
+        private Button btnAddSupplier;
+        private Button btnApply;
+        private Button btnCancel;
+        private TextBox txtKey;
     }
 }
