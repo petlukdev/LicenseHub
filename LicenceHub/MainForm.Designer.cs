@@ -30,71 +30,71 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             toolStrip1 = new ToolStrip();
-            toolStripButton1 = new ToolStripButton();
-            toolStripButton2 = new ToolStripButton();
-            toolStripButton3 = new ToolStripButton();
-            tabControl1 = new TabControl();
-            tabPage1 = new TabPage();
+            btnAddEntry = new ToolStripButton();
+            btnModifyEntry = new ToolStripButton();
+            btnDeleteEntry = new ToolStripButton();
+            tabControl = new TabControl();
+            licensePage = new TabPage();
             groupBox2 = new GroupBox();
             flowLayoutPanel4 = new FlowLayoutPanel();
             label8 = new Label();
-            textBox4 = new TextBox();
-            comboBox2 = new ComboBox();
-            comboBox3 = new ComboBox();
-            comboBox4 = new ComboBox();
-            comboBox5 = new ComboBox();
-            button7 = new Button();
-            button8 = new Button();
-            dataGridView1 = new DataGridView();
-            tabPage2 = new TabPage();
+            searchLicense = new TextBox();
+            comboTypeLicense = new ComboBox();
+            comboExpiration = new ComboBox();
+            comboOwner = new ComboBox();
+            comboSupplier = new ComboBox();
+            btnApplyLicense = new Button();
+            btnClearLicense = new Button();
+            dataGridLicense = new DataGridView();
+            ownerPage = new TabPage();
             groupBox1 = new GroupBox();
             flowLayoutPanel3 = new FlowLayoutPanel();
             label7 = new Label();
-            textBox3 = new TextBox();
-            comboBox1 = new ComboBox();
-            button5 = new Button();
-            button6 = new Button();
-            dataGridView2 = new DataGridView();
-            tabPage3 = new TabPage();
+            searchOwner = new TextBox();
+            comboDepartment = new ComboBox();
+            btnApplyOwner = new Button();
+            btnClearOwner = new Button();
+            dataGridOwner = new DataGridView();
+            supplierPage = new TabPage();
             groupBox3 = new GroupBox();
             flowLayoutPanel2 = new FlowLayoutPanel();
             label6 = new Label();
-            textBox2 = new TextBox();
-            button3 = new Button();
-            button4 = new Button();
-            dataGridView3 = new DataGridView();
-            tabPage4 = new TabPage();
+            searchSupplier = new TextBox();
+            btnApplySupplier = new Button();
+            btnClearSupplier = new Button();
+            dataGridSupplier = new DataGridView();
+            departmentPage = new TabPage();
             groupBox4 = new GroupBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             label5 = new Label();
-            textBox1 = new TextBox();
-            button1 = new Button();
-            button2 = new Button();
-            dataGridView4 = new DataGridView();
+            searchDepartment = new TextBox();
+            btnApplyDepartment = new Button();
+            btnClearDepartment = new Button();
+            dataGridDepartment = new DataGridView();
             tableLayoutPanel1 = new TableLayoutPanel();
             label1 = new Label();
             label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
+            lblTotalLicenses = new Label();
+            lblExpire30Days = new Label();
             panel1 = new Panel();
             toolStrip1.SuspendLayout();
-            tabControl1.SuspendLayout();
-            tabPage1.SuspendLayout();
+            tabControl.SuspendLayout();
+            licensePage.SuspendLayout();
             groupBox2.SuspendLayout();
             flowLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridLicense).BeginInit();
+            ownerPage.SuspendLayout();
             groupBox1.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
-            tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridOwner).BeginInit();
+            supplierPage.SuspendLayout();
             groupBox3.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView3).BeginInit();
-            tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridSupplier).BeginInit();
+            departmentPage.SuspendLayout();
             groupBox4.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridDepartment).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -102,67 +102,72 @@
             // toolStrip1
             // 
             toolStrip1.AutoSize = false;
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton3 });
+            toolStrip1.ImageScalingSize = new Size(20, 20);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnAddEntry, btnModifyEntry, btnDeleteEntry });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(800, 38);
+            toolStrip1.Size = new Size(914, 51);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // btnAddEntry
             // 
-            toolStripButton1.Image = LicenseHub.Properties.Resources.PlusIcon;
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.Size = new Size(81, 35);
-            toolStripButton1.Text = "New Entry";
+            btnAddEntry.Image = LicenseHub.Properties.Resources.PlusIcon;
+            btnAddEntry.ImageTransparentColor = Color.Magenta;
+            btnAddEntry.Name = "btnAddEntry";
+            btnAddEntry.Size = new Size(100, 48);
+            btnAddEntry.Text = "New Entry";
             // 
-            // toolStripButton2
+            // btnModifyEntry
             // 
-            toolStripButton2.Image = LicenseHub.Properties.Resources.PenIcon;
-            toolStripButton2.ImageTransparentColor = Color.Magenta;
-            toolStripButton2.Name = "toolStripButton2";
-            toolStripButton2.Size = new Size(65, 35);
-            toolStripButton2.Text = "Modify";
+            btnModifyEntry.Image = LicenseHub.Properties.Resources.PenIcon;
+            btnModifyEntry.ImageTransparentColor = Color.Magenta;
+            btnModifyEntry.Name = "btnModifyEntry";
+            btnModifyEntry.Size = new Size(80, 48);
+            btnModifyEntry.Text = "Modify";
             // 
-            // toolStripButton3
+            // btnDeleteEntry
             // 
-            toolStripButton3.Image = LicenseHub.Properties.Resources.BinIcon;
-            toolStripButton3.ImageTransparentColor = Color.Magenta;
-            toolStripButton3.Name = "toolStripButton3";
-            toolStripButton3.Size = new Size(60, 35);
-            toolStripButton3.Text = "Delete";
+            btnDeleteEntry.Image = LicenseHub.Properties.Resources.BinIcon;
+            btnDeleteEntry.ImageTransparentColor = Color.Magenta;
+            btnDeleteEntry.Name = "btnDeleteEntry";
+            btnDeleteEntry.Size = new Size(77, 48);
+            btnDeleteEntry.Text = "Delete";
             // 
-            // tabControl1
+            // tabControl
             // 
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Controls.Add(tabPage3);
-            tabControl1.Controls.Add(tabPage4);
-            tabControl1.Location = new Point(12, 41);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(776, 352);
-            tabControl1.TabIndex = 0;
+            tabControl.Controls.Add(licensePage);
+            tabControl.Controls.Add(ownerPage);
+            tabControl.Controls.Add(supplierPage);
+            tabControl.Controls.Add(departmentPage);
+            tabControl.Location = new Point(14, 55);
+            tabControl.Margin = new Padding(3, 4, 3, 4);
+            tabControl.Name = "tabControl";
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new Size(887, 469);
+            tabControl.TabIndex = 0;
             // 
-            // tabPage1
+            // licensePage
             // 
-            tabPage1.Controls.Add(groupBox2);
-            tabPage1.Controls.Add(dataGridView1);
-            tabPage1.Location = new Point(4, 24);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(768, 324);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "Licenses";
-            tabPage1.UseVisualStyleBackColor = true;
+            licensePage.Controls.Add(groupBox2);
+            licensePage.Controls.Add(dataGridLicense);
+            licensePage.Location = new Point(4, 29);
+            licensePage.Margin = new Padding(3, 4, 3, 4);
+            licensePage.Name = "licensePage";
+            licensePage.Padding = new Padding(3, 4, 3, 4);
+            licensePage.Size = new Size(879, 436);
+            licensePage.TabIndex = 0;
+            licensePage.Text = "Licenses";
+            licensePage.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(flowLayoutPanel4);
-            groupBox2.Location = new Point(5, 5);
+            groupBox2.Location = new Point(6, 7);
+            groupBox2.Margin = new Padding(3, 4, 3, 4);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(759, 83);
+            groupBox2.Padding = new Padding(3, 4, 3, 4);
+            groupBox2.Size = new Size(867, 111);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Filter";
@@ -170,119 +175,132 @@
             // flowLayoutPanel4
             // 
             flowLayoutPanel4.Controls.Add(label8);
-            flowLayoutPanel4.Controls.Add(textBox4);
-            flowLayoutPanel4.Controls.Add(comboBox2);
-            flowLayoutPanel4.Controls.Add(comboBox3);
-            flowLayoutPanel4.Controls.Add(comboBox4);
-            flowLayoutPanel4.Controls.Add(comboBox5);
-            flowLayoutPanel4.Controls.Add(button7);
-            flowLayoutPanel4.Controls.Add(button8);
+            flowLayoutPanel4.Controls.Add(searchLicense);
+            flowLayoutPanel4.Controls.Add(comboTypeLicense);
+            flowLayoutPanel4.Controls.Add(comboExpiration);
+            flowLayoutPanel4.Controls.Add(comboOwner);
+            flowLayoutPanel4.Controls.Add(comboSupplier);
+            flowLayoutPanel4.Controls.Add(btnApplyLicense);
+            flowLayoutPanel4.Controls.Add(btnClearLicense);
             flowLayoutPanel4.Dock = DockStyle.Fill;
-            flowLayoutPanel4.Location = new Point(3, 19);
+            flowLayoutPanel4.Location = new Point(3, 24);
+            flowLayoutPanel4.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new Size(753, 61);
+            flowLayoutPanel4.Size = new Size(861, 83);
             flowLayoutPanel4.TabIndex = 1;
             // 
             // label8
             // 
             label8.Anchor = AnchorStyles.Left;
             label8.AutoSize = true;
-            label8.Location = new Point(3, 7);
+            label8.Location = new Point(3, 8);
             label8.Name = "label8";
-            label8.Size = new Size(45, 15);
+            label8.Size = new Size(56, 20);
             label8.TabIndex = 0;
             label8.Text = "Search:";
             // 
-            // textBox4
+            // searchLicense
             // 
-            textBox4.Anchor = AnchorStyles.Left;
-            textBox4.Location = new Point(54, 3);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(150, 23);
-            textBox4.TabIndex = 1;
+            searchLicense.Anchor = AnchorStyles.Left;
+            searchLicense.Location = new Point(65, 4);
+            searchLicense.Margin = new Padding(3, 4, 3, 4);
+            searchLicense.Name = "searchLicense";
+            searchLicense.Size = new Size(171, 27);
+            searchLicense.TabIndex = 1;
             // 
-            // comboBox2
+            // comboTypeLicense
             // 
-            comboBox2.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(210, 3);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(121, 23);
-            comboBox2.TabIndex = 4;
+            comboTypeLicense.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboTypeLicense.FormattingEnabled = true;
+            comboTypeLicense.Location = new Point(242, 4);
+            comboTypeLicense.Margin = new Padding(3, 4, 3, 4);
+            comboTypeLicense.Name = "comboTypeLicense";
+            comboTypeLicense.Size = new Size(138, 28);
+            comboTypeLicense.TabIndex = 4;
             // 
-            // comboBox3
+            // comboExpiration
             // 
-            comboBox3.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(337, 3);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(121, 23);
-            comboBox3.TabIndex = 5;
+            comboExpiration.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboExpiration.FormattingEnabled = true;
+            comboExpiration.Location = new Point(386, 4);
+            comboExpiration.Margin = new Padding(3, 4, 3, 4);
+            comboExpiration.Name = "comboExpiration";
+            comboExpiration.Size = new Size(138, 28);
+            comboExpiration.TabIndex = 5;
             // 
-            // comboBox4
+            // comboOwner
             // 
-            comboBox4.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(464, 3);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(121, 23);
-            comboBox4.TabIndex = 6;
+            comboOwner.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboOwner.FormattingEnabled = true;
+            comboOwner.Location = new Point(530, 4);
+            comboOwner.Margin = new Padding(3, 4, 3, 4);
+            comboOwner.Name = "comboOwner";
+            comboOwner.Size = new Size(138, 28);
+            comboOwner.TabIndex = 6;
             // 
-            // comboBox5
+            // comboSupplier
             // 
-            comboBox5.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new Point(591, 3);
-            comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(121, 23);
-            comboBox5.TabIndex = 7;
+            comboSupplier.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboSupplier.FormattingEnabled = true;
+            comboSupplier.Location = new Point(674, 4);
+            comboSupplier.Margin = new Padding(3, 4, 3, 4);
+            comboSupplier.Name = "comboSupplier";
+            comboSupplier.Size = new Size(138, 28);
+            comboSupplier.TabIndex = 7;
             // 
-            // button7
+            // btnApplyLicense
             // 
-            button7.Anchor = AnchorStyles.Left;
-            button7.Location = new Point(3, 32);
-            button7.Name = "button7";
-            button7.Size = new Size(75, 23);
-            button7.TabIndex = 2;
-            button7.Text = "Apply";
-            button7.UseVisualStyleBackColor = true;
+            btnApplyLicense.Anchor = AnchorStyles.Left;
+            btnApplyLicense.Location = new Point(3, 40);
+            btnApplyLicense.Margin = new Padding(3, 4, 3, 4);
+            btnApplyLicense.Name = "btnApplyLicense";
+            btnApplyLicense.Size = new Size(86, 31);
+            btnApplyLicense.TabIndex = 2;
+            btnApplyLicense.Text = "Apply";
+            btnApplyLicense.UseVisualStyleBackColor = true;
             // 
-            // button8
+            // btnClearLicense
             // 
-            button8.Anchor = AnchorStyles.Left;
-            button8.Location = new Point(84, 32);
-            button8.Name = "button8";
-            button8.Size = new Size(75, 23);
-            button8.TabIndex = 3;
-            button8.Text = "Clear";
-            button8.UseVisualStyleBackColor = true;
+            btnClearLicense.Anchor = AnchorStyles.Left;
+            btnClearLicense.Location = new Point(95, 40);
+            btnClearLicense.Margin = new Padding(3, 4, 3, 4);
+            btnClearLicense.Name = "btnClearLicense";
+            btnClearLicense.Size = new Size(86, 31);
+            btnClearLicense.TabIndex = 3;
+            btnClearLicense.Text = "Clear";
+            btnClearLicense.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dataGridLicense
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(5, 91);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(759, 229);
-            dataGridView1.TabIndex = 0;
+            dataGridLicense.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridLicense.Location = new Point(6, 121);
+            dataGridLicense.Margin = new Padding(3, 4, 3, 4);
+            dataGridLicense.Name = "dataGridLicense";
+            dataGridLicense.RowHeadersWidth = 51;
+            dataGridLicense.Size = new Size(867, 305);
+            dataGridLicense.TabIndex = 0;
             // 
-            // tabPage2
+            // ownerPage
             // 
-            tabPage2.Controls.Add(groupBox1);
-            tabPage2.Controls.Add(dataGridView2);
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(768, 324);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Owners";
-            tabPage2.UseVisualStyleBackColor = true;
+            ownerPage.Controls.Add(groupBox1);
+            ownerPage.Controls.Add(dataGridOwner);
+            ownerPage.Location = new Point(4, 29);
+            ownerPage.Margin = new Padding(3, 4, 3, 4);
+            ownerPage.Name = "ownerPage";
+            ownerPage.Padding = new Padding(3, 4, 3, 4);
+            ownerPage.Size = new Size(879, 436);
+            ownerPage.TabIndex = 1;
+            ownerPage.Text = "Owners";
+            ownerPage.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(flowLayoutPanel3);
-            groupBox1.Location = new Point(5, 5);
+            groupBox1.Location = new Point(6, 7);
+            groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(759, 63);
+            groupBox1.Padding = new Padding(3, 4, 3, 4);
+            groupBox1.Size = new Size(867, 84);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Filter";
@@ -290,89 +308,99 @@
             // flowLayoutPanel3
             // 
             flowLayoutPanel3.Controls.Add(label7);
-            flowLayoutPanel3.Controls.Add(textBox3);
-            flowLayoutPanel3.Controls.Add(comboBox1);
-            flowLayoutPanel3.Controls.Add(button5);
-            flowLayoutPanel3.Controls.Add(button6);
+            flowLayoutPanel3.Controls.Add(searchOwner);
+            flowLayoutPanel3.Controls.Add(comboDepartment);
+            flowLayoutPanel3.Controls.Add(btnApplyOwner);
+            flowLayoutPanel3.Controls.Add(btnClearOwner);
             flowLayoutPanel3.Dock = DockStyle.Fill;
-            flowLayoutPanel3.Location = new Point(3, 19);
+            flowLayoutPanel3.Location = new Point(3, 24);
+            flowLayoutPanel3.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(753, 41);
+            flowLayoutPanel3.Size = new Size(861, 56);
             flowLayoutPanel3.TabIndex = 1;
             // 
             // label7
             // 
             label7.Anchor = AnchorStyles.Left;
             label7.AutoSize = true;
-            label7.Location = new Point(3, 7);
+            label7.Location = new Point(3, 9);
             label7.Name = "label7";
-            label7.Size = new Size(45, 15);
+            label7.Size = new Size(56, 20);
             label7.TabIndex = 0;
             label7.Text = "Search:";
             // 
-            // textBox3
+            // searchOwner
             // 
-            textBox3.Anchor = AnchorStyles.Left;
-            textBox3.Location = new Point(54, 3);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(150, 23);
-            textBox3.TabIndex = 1;
+            searchOwner.Anchor = AnchorStyles.Left;
+            searchOwner.Location = new Point(65, 6);
+            searchOwner.Margin = new Padding(3, 4, 3, 4);
+            searchOwner.Name = "searchOwner";
+            searchOwner.Size = new Size(171, 27);
+            searchOwner.TabIndex = 1;
             // 
-            // comboBox1
+            // comboDepartment
             // 
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(210, 3);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(150, 23);
-            comboBox1.TabIndex = 4;
+            comboDepartment.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboDepartment.FormattingEnabled = true;
+            comboDepartment.Location = new Point(242, 4);
+            comboDepartment.Margin = new Padding(3, 4, 3, 4);
+            comboDepartment.Name = "comboDepartment";
+            comboDepartment.Size = new Size(171, 28);
+            comboDepartment.TabIndex = 4;
             // 
-            // button5
+            // btnApplyOwner
             // 
-            button5.Anchor = AnchorStyles.Left;
-            button5.Location = new Point(366, 3);
-            button5.Name = "button5";
-            button5.Size = new Size(75, 23);
-            button5.TabIndex = 2;
-            button5.Text = "Apply";
-            button5.UseVisualStyleBackColor = true;
+            btnApplyOwner.Anchor = AnchorStyles.Left;
+            btnApplyOwner.Location = new Point(419, 4);
+            btnApplyOwner.Margin = new Padding(3, 4, 3, 4);
+            btnApplyOwner.Name = "btnApplyOwner";
+            btnApplyOwner.Size = new Size(86, 31);
+            btnApplyOwner.TabIndex = 2;
+            btnApplyOwner.Text = "Apply";
+            btnApplyOwner.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btnClearOwner
             // 
-            button6.Anchor = AnchorStyles.Left;
-            button6.Location = new Point(447, 3);
-            button6.Name = "button6";
-            button6.Size = new Size(75, 23);
-            button6.TabIndex = 3;
-            button6.Text = "Clear";
-            button6.UseVisualStyleBackColor = true;
+            btnClearOwner.Anchor = AnchorStyles.Left;
+            btnClearOwner.Location = new Point(511, 4);
+            btnClearOwner.Margin = new Padding(3, 4, 3, 4);
+            btnClearOwner.Name = "btnClearOwner";
+            btnClearOwner.Size = new Size(86, 31);
+            btnClearOwner.TabIndex = 3;
+            btnClearOwner.Text = "Clear";
+            btnClearOwner.UseVisualStyleBackColor = true;
             // 
-            // dataGridView2
+            // dataGridOwner
             // 
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(5, 74);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.Size = new Size(759, 246);
-            dataGridView2.TabIndex = 2;
+            dataGridOwner.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridOwner.Location = new Point(6, 99);
+            dataGridOwner.Margin = new Padding(3, 4, 3, 4);
+            dataGridOwner.Name = "dataGridOwner";
+            dataGridOwner.RowHeadersWidth = 51;
+            dataGridOwner.Size = new Size(867, 328);
+            dataGridOwner.TabIndex = 2;
             // 
-            // tabPage3
+            // supplierPage
             // 
-            tabPage3.Controls.Add(groupBox3);
-            tabPage3.Controls.Add(dataGridView3);
-            tabPage3.Location = new Point(4, 24);
-            tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(768, 324);
-            tabPage3.TabIndex = 2;
-            tabPage3.Text = "Suppliers";
-            tabPage3.UseVisualStyleBackColor = true;
+            supplierPage.Controls.Add(groupBox3);
+            supplierPage.Controls.Add(dataGridSupplier);
+            supplierPage.Location = new Point(4, 29);
+            supplierPage.Margin = new Padding(3, 4, 3, 4);
+            supplierPage.Name = "supplierPage";
+            supplierPage.Padding = new Padding(3, 4, 3, 4);
+            supplierPage.Size = new Size(879, 436);
+            supplierPage.TabIndex = 2;
+            supplierPage.Text = "Suppliers";
+            supplierPage.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
             groupBox3.Controls.Add(flowLayoutPanel2);
-            groupBox3.Location = new Point(5, 5);
+            groupBox3.Location = new Point(6, 7);
+            groupBox3.Margin = new Padding(3, 4, 3, 4);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(759, 63);
+            groupBox3.Padding = new Padding(3, 4, 3, 4);
+            groupBox3.Size = new Size(867, 84);
             groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
             groupBox3.Text = "Filter";
@@ -380,79 +408,88 @@
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.Controls.Add(label6);
-            flowLayoutPanel2.Controls.Add(textBox2);
-            flowLayoutPanel2.Controls.Add(button3);
-            flowLayoutPanel2.Controls.Add(button4);
+            flowLayoutPanel2.Controls.Add(searchSupplier);
+            flowLayoutPanel2.Controls.Add(btnApplySupplier);
+            flowLayoutPanel2.Controls.Add(btnClearSupplier);
             flowLayoutPanel2.Dock = DockStyle.Fill;
-            flowLayoutPanel2.Location = new Point(3, 19);
+            flowLayoutPanel2.Location = new Point(3, 24);
+            flowLayoutPanel2.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(753, 41);
+            flowLayoutPanel2.Size = new Size(861, 56);
             flowLayoutPanel2.TabIndex = 1;
             // 
             // label6
             // 
             label6.Anchor = AnchorStyles.Left;
             label6.AutoSize = true;
-            label6.Location = new Point(3, 7);
+            label6.Location = new Point(3, 9);
             label6.Name = "label6";
-            label6.Size = new Size(45, 15);
+            label6.Size = new Size(56, 20);
             label6.TabIndex = 0;
             label6.Text = "Search:";
             // 
-            // textBox2
+            // searchSupplier
             // 
-            textBox2.Anchor = AnchorStyles.Left;
-            textBox2.Location = new Point(54, 3);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(150, 23);
-            textBox2.TabIndex = 1;
+            searchSupplier.Anchor = AnchorStyles.Left;
+            searchSupplier.Location = new Point(65, 6);
+            searchSupplier.Margin = new Padding(3, 4, 3, 4);
+            searchSupplier.Name = "searchSupplier";
+            searchSupplier.Size = new Size(171, 27);
+            searchSupplier.TabIndex = 1;
             // 
-            // button3
+            // btnApplySupplier
             // 
-            button3.Anchor = AnchorStyles.Left;
-            button3.Location = new Point(210, 3);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 2;
-            button3.Text = "Apply";
-            button3.UseVisualStyleBackColor = true;
+            btnApplySupplier.Anchor = AnchorStyles.Left;
+            btnApplySupplier.Location = new Point(242, 4);
+            btnApplySupplier.Margin = new Padding(3, 4, 3, 4);
+            btnApplySupplier.Name = "btnApplySupplier";
+            btnApplySupplier.Size = new Size(86, 31);
+            btnApplySupplier.TabIndex = 2;
+            btnApplySupplier.Text = "Apply";
+            btnApplySupplier.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnClearSupplier
             // 
-            button4.Anchor = AnchorStyles.Left;
-            button4.Location = new Point(291, 3);
-            button4.Name = "button4";
-            button4.Size = new Size(75, 23);
-            button4.TabIndex = 3;
-            button4.Text = "Clear";
-            button4.UseVisualStyleBackColor = true;
+            btnClearSupplier.Anchor = AnchorStyles.Left;
+            btnClearSupplier.Location = new Point(334, 4);
+            btnClearSupplier.Margin = new Padding(3, 4, 3, 4);
+            btnClearSupplier.Name = "btnClearSupplier";
+            btnClearSupplier.Size = new Size(86, 31);
+            btnClearSupplier.TabIndex = 3;
+            btnClearSupplier.Text = "Clear";
+            btnClearSupplier.UseVisualStyleBackColor = true;
             // 
-            // dataGridView3
+            // dataGridSupplier
             // 
-            dataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView3.Location = new Point(5, 74);
-            dataGridView3.Name = "dataGridView3";
-            dataGridView3.Size = new Size(759, 246);
-            dataGridView3.TabIndex = 2;
+            dataGridSupplier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridSupplier.Location = new Point(6, 99);
+            dataGridSupplier.Margin = new Padding(3, 4, 3, 4);
+            dataGridSupplier.Name = "dataGridSupplier";
+            dataGridSupplier.RowHeadersWidth = 51;
+            dataGridSupplier.Size = new Size(867, 328);
+            dataGridSupplier.TabIndex = 2;
             // 
-            // tabPage4
+            // departmentPage
             // 
-            tabPage4.Controls.Add(groupBox4);
-            tabPage4.Controls.Add(dataGridView4);
-            tabPage4.Location = new Point(4, 24);
-            tabPage4.Name = "tabPage4";
-            tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(768, 324);
-            tabPage4.TabIndex = 3;
-            tabPage4.Text = "Departments";
-            tabPage4.UseVisualStyleBackColor = true;
+            departmentPage.Controls.Add(groupBox4);
+            departmentPage.Controls.Add(dataGridDepartment);
+            departmentPage.Location = new Point(4, 29);
+            departmentPage.Margin = new Padding(3, 4, 3, 4);
+            departmentPage.Name = "departmentPage";
+            departmentPage.Padding = new Padding(3, 4, 3, 4);
+            departmentPage.Size = new Size(879, 436);
+            departmentPage.TabIndex = 3;
+            departmentPage.Text = "Departments";
+            departmentPage.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
             groupBox4.Controls.Add(flowLayoutPanel1);
-            groupBox4.Location = new Point(5, 5);
+            groupBox4.Location = new Point(6, 7);
+            groupBox4.Margin = new Padding(3, 4, 3, 4);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(759, 63);
+            groupBox4.Padding = new Padding(3, 4, 3, 4);
+            groupBox4.Size = new Size(867, 84);
             groupBox4.TabIndex = 3;
             groupBox4.TabStop = false;
             groupBox4.Text = "Filter";
@@ -460,60 +497,66 @@
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Controls.Add(label5);
-            flowLayoutPanel1.Controls.Add(textBox1);
-            flowLayoutPanel1.Controls.Add(button1);
-            flowLayoutPanel1.Controls.Add(button2);
+            flowLayoutPanel1.Controls.Add(searchDepartment);
+            flowLayoutPanel1.Controls.Add(btnApplyDepartment);
+            flowLayoutPanel1.Controls.Add(btnClearDepartment);
             flowLayoutPanel1.Dock = DockStyle.Fill;
-            flowLayoutPanel1.Location = new Point(3, 19);
+            flowLayoutPanel1.Location = new Point(3, 24);
+            flowLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(753, 41);
+            flowLayoutPanel1.Size = new Size(861, 56);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // label5
             // 
             label5.Anchor = AnchorStyles.Left;
             label5.AutoSize = true;
-            label5.Location = new Point(3, 7);
+            label5.Location = new Point(3, 9);
             label5.Name = "label5";
-            label5.Size = new Size(45, 15);
+            label5.Size = new Size(56, 20);
             label5.TabIndex = 0;
             label5.Text = "Search:";
             // 
-            // textBox1
+            // searchDepartment
             // 
-            textBox1.Anchor = AnchorStyles.Left;
-            textBox1.Location = new Point(54, 3);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(150, 23);
-            textBox1.TabIndex = 1;
+            searchDepartment.Anchor = AnchorStyles.Left;
+            searchDepartment.Location = new Point(65, 6);
+            searchDepartment.Margin = new Padding(3, 4, 3, 4);
+            searchDepartment.Name = "searchDepartment";
+            searchDepartment.Size = new Size(171, 27);
+            searchDepartment.TabIndex = 1;
             // 
-            // button1
+            // btnApplyDepartment
             // 
-            button1.Anchor = AnchorStyles.Left;
-            button1.Location = new Point(210, 3);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 2;
-            button1.Text = "Apply";
-            button1.UseVisualStyleBackColor = true;
+            btnApplyDepartment.Anchor = AnchorStyles.Left;
+            btnApplyDepartment.Location = new Point(242, 4);
+            btnApplyDepartment.Margin = new Padding(3, 4, 3, 4);
+            btnApplyDepartment.Name = "btnApplyDepartment";
+            btnApplyDepartment.Size = new Size(86, 31);
+            btnApplyDepartment.TabIndex = 2;
+            btnApplyDepartment.Text = "Apply";
+            btnApplyDepartment.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnClearDepartment
             // 
-            button2.Anchor = AnchorStyles.Left;
-            button2.Location = new Point(291, 3);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 3;
-            button2.Text = "Clear";
-            button2.UseVisualStyleBackColor = true;
+            btnClearDepartment.Anchor = AnchorStyles.Left;
+            btnClearDepartment.Location = new Point(334, 4);
+            btnClearDepartment.Margin = new Padding(3, 4, 3, 4);
+            btnClearDepartment.Name = "btnClearDepartment";
+            btnClearDepartment.Size = new Size(86, 31);
+            btnClearDepartment.TabIndex = 3;
+            btnClearDepartment.Text = "Clear";
+            btnClearDepartment.UseVisualStyleBackColor = true;
             // 
-            // dataGridView4
+            // dataGridDepartment
             // 
-            dataGridView4.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView4.Location = new Point(5, 74);
-            dataGridView4.Name = "dataGridView4";
-            dataGridView4.Size = new Size(759, 246);
-            dataGridView4.TabIndex = 2;
+            dataGridDepartment.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridDepartment.Location = new Point(6, 99);
+            dataGridDepartment.Margin = new Padding(3, 4, 3, 4);
+            dataGridDepartment.Name = "dataGridDepartment";
+            dataGridDepartment.RowHeadersWidth = 51;
+            dataGridDepartment.Size = new Size(867, 328);
+            dataGridDepartment.TabIndex = 2;
             // 
             // tableLayoutPanel1
             // 
@@ -522,15 +565,16 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 24.848484F));
             tableLayoutPanel1.Controls.Add(label1, 0, 0);
             tableLayoutPanel1.Controls.Add(label2, 0, 1);
-            tableLayoutPanel1.Controls.Add(label3, 1, 0);
-            tableLayoutPanel1.Controls.Add(label4, 1, 1);
+            tableLayoutPanel1.Controls.Add(lblTotalLicenses, 1, 0);
+            tableLayoutPanel1.Controls.Add(lblExpire30Days, 1, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(2, 2);
+            tableLayoutPanel1.Location = new Point(2, 3);
+            tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(160, 33);
+            tableLayoutPanel1.Size = new Size(183, 43);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -539,89 +583,91 @@
             label1.AutoSize = true;
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
-            label1.Size = new Size(80, 16);
+            label1.Size = new Size(100, 21);
             label1.TabIndex = 0;
-            label1.Text = "Total licences:";
+            label1.Text = "Total licenses:";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             label2.AutoSize = true;
-            label2.Location = new Point(3, 16);
+            label2.Location = new Point(3, 21);
             label2.Name = "label2";
-            label2.Size = new Size(102, 17);
+            label2.Size = new Size(129, 22);
             label2.TabIndex = 1;
             label2.Text = "Expires in 30 days:";
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label3
+            // lblTotalLicenses
             // 
-            label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            label3.AutoSize = true;
-            label3.Location = new Point(144, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(13, 16);
-            label3.TabIndex = 2;
-            label3.Text = "0";
-            label3.TextAlign = ContentAlignment.MiddleCenter;
+            lblTotalLicenses.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            lblTotalLicenses.AutoSize = true;
+            lblTotalLicenses.Location = new Point(163, 0);
+            lblTotalLicenses.Name = "lblTotalLicenses";
+            lblTotalLicenses.Size = new Size(17, 21);
+            lblTotalLicenses.TabIndex = 2;
+            lblTotalLicenses.Text = "0";
+            lblTotalLicenses.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // label4
+            // lblExpire30Days
             // 
-            label4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            label4.AutoSize = true;
-            label4.Location = new Point(144, 16);
-            label4.Name = "label4";
-            label4.Size = new Size(13, 17);
-            label4.TabIndex = 3;
-            label4.Text = "0";
-            label4.TextAlign = ContentAlignment.MiddleCenter;
+            lblExpire30Days.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            lblExpire30Days.AutoSize = true;
+            lblExpire30Days.Location = new Point(163, 21);
+            lblExpire30Days.Name = "lblExpire30Days";
+            lblExpire30Days.Size = new Size(17, 22);
+            lblExpire30Days.TabIndex = 3;
+            lblExpire30Days.Text = "0";
+            lblExpire30Days.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panel1
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(tableLayoutPanel1);
-            panel1.Location = new Point(622, 399);
+            panel1.Location = new Point(711, 532);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Padding = new Padding(2);
-            panel1.Size = new Size(166, 39);
+            panel1.Padding = new Padding(2, 3, 2, 3);
+            panel1.Size = new Size(189, 51);
             panel1.TabIndex = 3;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(tabControl1);
+            ClientSize = new Size(914, 600);
+            Controls.Add(tabControl);
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 4, 3, 4);
             Name = "MainForm";
             Text = "LicenseHub";
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
-            tabControl1.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
+            tabControl.ResumeLayout(false);
+            licensePage.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             flowLayoutPanel4.ResumeLayout(false);
             flowLayoutPanel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridLicense).EndInit();
+            ownerPage.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             flowLayoutPanel3.ResumeLayout(false);
             flowLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
-            tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridOwner).EndInit();
+            supplierPage.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView3).EndInit();
-            tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridSupplier).EndInit();
+            departmentPage.ResumeLayout(false);
             groupBox4.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridDepartment).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             panel1.ResumeLayout(false);
@@ -631,52 +677,52 @@
         #endregion
 
         private ToolStrip toolStrip1;
-        private ToolStripButton toolStripButton1;
-        private ToolStripButton toolStripButton2;
-        private ToolStripButton toolStripButton3;
-        private TabControl tabControl1;
+        private ToolStripButton btnAddEntry;
+        private ToolStripButton btnModifyEntry;
+        private ToolStripButton btnDeleteEntry;
+        private TabControl tabControl;
         private TableLayoutPanel tableLayoutPanel1;
         private Label label1;
         private Label label2;
-        private Label label3;
-        private Label label4;
+        private Label lblTotalLicenses;
+        private Label lblExpire30Days;
         private Panel panel1;
-        private TabPage tabPage1;
-        private DataGridView dataGridView1;
+        private TabPage licensePage;
+        private DataGridView dataGridLicense;
         private GroupBox groupBox2;
-        private TabPage tabPage2;
+        private TabPage ownerPage;
         private GroupBox groupBox1;
-        private DataGridView dataGridView2;
-        private TabPage tabPage3;
+        private DataGridView dataGridOwner;
+        private TabPage supplierPage;
         private GroupBox groupBox3;
-        private DataGridView dataGridView3;
-        private TabPage tabPage4;
+        private DataGridView dataGridSupplier;
+        private TabPage departmentPage;
         private GroupBox groupBox4;
-        private DataGridView dataGridView4;
+        private DataGridView dataGridDepartment;
         private FlowLayoutPanel flowLayoutPanel1;
         private Label label5;
-        private TextBox textBox1;
-        private Button button1;
-        private Button button2;
+        private TextBox searchDepartment;
+        private Button btnApplyDepartment;
+        private Button btnClearDepartment;
         private FlowLayoutPanel flowLayoutPanel3;
         private Label label7;
-        private TextBox textBox3;
-        private ComboBox comboBox1;
-        private Button button5;
-        private Button button6;
+        private TextBox searchOwner;
+        private ComboBox comboDepartment;
+        private Button btnApplyOwner;
+        private Button btnClearOwner;
         private FlowLayoutPanel flowLayoutPanel2;
         private Label label6;
-        private TextBox textBox2;
-        private Button button3;
-        private Button button4;
+        private TextBox searchSupplier;
+        private Button btnApplySupplier;
+        private Button btnClearSupplier;
         private FlowLayoutPanel flowLayoutPanel4;
         private Label label8;
-        private TextBox textBox4;
-        private ComboBox comboBox2;
-        private ComboBox comboBox3;
-        private ComboBox comboBox4;
-        private ComboBox comboBox5;
-        private Button button7;
-        private Button button8;
+        private TextBox searchLicense;
+        private ComboBox comboTypeLicense;
+        private ComboBox comboExpiration;
+        private ComboBox comboOwner;
+        private ComboBox comboSupplier;
+        private Button btnApplyLicense;
+        private Button btnClearLicense;
     }
 }
