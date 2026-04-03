@@ -106,7 +106,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { btnAddEntry, btnModifyEntry, btnDeleteEntry });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(914, 51);
+            toolStrip1.Size = new Size(800, 38);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -115,7 +115,7 @@
             btnAddEntry.Image = LicenseHub.Properties.Resources.PlusIcon;
             btnAddEntry.ImageTransparentColor = Color.Magenta;
             btnAddEntry.Name = "btnAddEntry";
-            btnAddEntry.Size = new Size(100, 48);
+            btnAddEntry.Size = new Size(85, 35);
             btnAddEntry.Text = "New Entry";
             btnAddEntry.Click += AddEntryEvent;
             // 
@@ -124,16 +124,18 @@
             btnModifyEntry.Image = LicenseHub.Properties.Resources.PenIcon;
             btnModifyEntry.ImageTransparentColor = Color.Magenta;
             btnModifyEntry.Name = "btnModifyEntry";
-            btnModifyEntry.Size = new Size(80, 48);
+            btnModifyEntry.Size = new Size(69, 35);
             btnModifyEntry.Text = "Modify";
+            btnModifyEntry.Click += ModifyEntryEvent;
             // 
             // btnDeleteEntry
             // 
             btnDeleteEntry.Image = LicenseHub.Properties.Resources.BinIcon;
             btnDeleteEntry.ImageTransparentColor = Color.Magenta;
             btnDeleteEntry.Name = "btnDeleteEntry";
-            btnDeleteEntry.Size = new Size(77, 48);
+            btnDeleteEntry.Size = new Size(64, 35);
             btnDeleteEntry.Text = "Delete";
+            btnDeleteEntry.Click += DeleteEntryEvent;
             // 
             // tabControl
             // 
@@ -141,22 +143,20 @@
             tabControl.Controls.Add(ownerPage);
             tabControl.Controls.Add(supplierPage);
             tabControl.Controls.Add(departmentPage);
-            tabControl.Location = new Point(14, 55);
-            tabControl.Margin = new Padding(3, 4, 3, 4);
+            tabControl.Location = new Point(12, 41);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(887, 469);
+            tabControl.Size = new Size(776, 352);
             tabControl.TabIndex = 0;
             // 
             // licensePage
             // 
             licensePage.Controls.Add(groupBox2);
             licensePage.Controls.Add(dataGridLicense);
-            licensePage.Location = new Point(4, 29);
-            licensePage.Margin = new Padding(3, 4, 3, 4);
+            licensePage.Location = new Point(4, 24);
             licensePage.Name = "licensePage";
-            licensePage.Padding = new Padding(3, 4, 3, 4);
-            licensePage.Size = new Size(879, 436);
+            licensePage.Padding = new Padding(3);
+            licensePage.Size = new Size(768, 324);
             licensePage.TabIndex = 0;
             licensePage.Text = "Licenses";
             licensePage.UseVisualStyleBackColor = true;
@@ -164,11 +164,9 @@
             // groupBox2
             // 
             groupBox2.Controls.Add(flowLayoutPanel4);
-            groupBox2.Location = new Point(6, 7);
-            groupBox2.Margin = new Padding(3, 4, 3, 4);
+            groupBox2.Location = new Point(5, 5);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(3, 4, 3, 4);
-            groupBox2.Size = new Size(867, 111);
+            groupBox2.Size = new Size(759, 83);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Text = "Filter";
@@ -184,78 +182,71 @@
             flowLayoutPanel4.Controls.Add(btnApplyLicense);
             flowLayoutPanel4.Controls.Add(btnClearLicense);
             flowLayoutPanel4.Dock = DockStyle.Fill;
-            flowLayoutPanel4.Location = new Point(3, 24);
-            flowLayoutPanel4.Margin = new Padding(3, 4, 3, 4);
+            flowLayoutPanel4.Location = new Point(3, 19);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
-            flowLayoutPanel4.Size = new Size(861, 83);
+            flowLayoutPanel4.Size = new Size(753, 61);
             flowLayoutPanel4.TabIndex = 1;
             // 
             // label8
             // 
             label8.Anchor = AnchorStyles.Left;
             label8.AutoSize = true;
-            label8.Location = new Point(3, 8);
+            label8.Location = new Point(3, 7);
             label8.Name = "label8";
-            label8.Size = new Size(56, 20);
+            label8.Size = new Size(45, 15);
             label8.TabIndex = 0;
             label8.Text = "Search:";
             // 
             // searchLicense
             // 
             searchLicense.Anchor = AnchorStyles.Left;
-            searchLicense.Location = new Point(65, 4);
-            searchLicense.Margin = new Padding(3, 4, 3, 4);
+            searchLicense.Location = new Point(54, 3);
             searchLicense.Name = "searchLicense";
-            searchLicense.Size = new Size(171, 27);
+            searchLicense.Size = new Size(150, 23);
             searchLicense.TabIndex = 1;
             // 
             // comboTypeLicense
             // 
             comboTypeLicense.DropDownStyle = ComboBoxStyle.DropDownList;
             comboTypeLicense.FormattingEnabled = true;
-            comboTypeLicense.Location = new Point(242, 4);
-            comboTypeLicense.Margin = new Padding(3, 4, 3, 4);
+            comboTypeLicense.Location = new Point(210, 3);
             comboTypeLicense.Name = "comboTypeLicense";
-            comboTypeLicense.Size = new Size(138, 28);
+            comboTypeLicense.Size = new Size(121, 23);
             comboTypeLicense.TabIndex = 4;
             // 
             // comboExpiration
             // 
             comboExpiration.DropDownStyle = ComboBoxStyle.DropDownList;
             comboExpiration.FormattingEnabled = true;
-            comboExpiration.Location = new Point(386, 4);
-            comboExpiration.Margin = new Padding(3, 4, 3, 4);
+            comboExpiration.Location = new Point(337, 3);
             comboExpiration.Name = "comboExpiration";
-            comboExpiration.Size = new Size(138, 28);
+            comboExpiration.Size = new Size(121, 23);
             comboExpiration.TabIndex = 5;
             // 
             // comboOwner
             // 
             comboOwner.DropDownStyle = ComboBoxStyle.DropDownList;
             comboOwner.FormattingEnabled = true;
-            comboOwner.Location = new Point(530, 4);
-            comboOwner.Margin = new Padding(3, 4, 3, 4);
+            comboOwner.Location = new Point(464, 3);
             comboOwner.Name = "comboOwner";
-            comboOwner.Size = new Size(138, 28);
+            comboOwner.Size = new Size(121, 23);
             comboOwner.TabIndex = 6;
             // 
             // comboSupplier
             // 
             comboSupplier.DropDownStyle = ComboBoxStyle.DropDownList;
             comboSupplier.FormattingEnabled = true;
-            comboSupplier.Location = new Point(674, 4);
-            comboSupplier.Margin = new Padding(3, 4, 3, 4);
+            comboSupplier.Location = new Point(591, 3);
             comboSupplier.Name = "comboSupplier";
-            comboSupplier.Size = new Size(138, 28);
+            comboSupplier.Size = new Size(121, 23);
             comboSupplier.TabIndex = 7;
             // 
             // btnApplyLicense
             // 
             btnApplyLicense.Anchor = AnchorStyles.Left;
-            btnApplyLicense.Location = new Point(3, 40);
-            btnApplyLicense.Margin = new Padding(3, 4, 3, 4);
+            btnApplyLicense.Location = new Point(3, 32);
             btnApplyLicense.Name = "btnApplyLicense";
-            btnApplyLicense.Size = new Size(86, 31);
+            btnApplyLicense.Size = new Size(75, 23);
             btnApplyLicense.TabIndex = 2;
             btnApplyLicense.Text = "Apply";
             btnApplyLicense.UseVisualStyleBackColor = true;
@@ -263,10 +254,9 @@
             // btnClearLicense
             // 
             btnClearLicense.Anchor = AnchorStyles.Left;
-            btnClearLicense.Location = new Point(95, 40);
-            btnClearLicense.Margin = new Padding(3, 4, 3, 4);
+            btnClearLicense.Location = new Point(84, 32);
             btnClearLicense.Name = "btnClearLicense";
-            btnClearLicense.Size = new Size(86, 31);
+            btnClearLicense.Size = new Size(75, 23);
             btnClearLicense.TabIndex = 3;
             btnClearLicense.Text = "Clear";
             btnClearLicense.UseVisualStyleBackColor = true;
@@ -274,22 +264,20 @@
             // dataGridLicense
             // 
             dataGridLicense.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridLicense.Location = new Point(6, 121);
-            dataGridLicense.Margin = new Padding(3, 4, 3, 4);
+            dataGridLicense.Location = new Point(5, 91);
             dataGridLicense.Name = "dataGridLicense";
             dataGridLicense.RowHeadersWidth = 51;
-            dataGridLicense.Size = new Size(867, 305);
+            dataGridLicense.Size = new Size(759, 229);
             dataGridLicense.TabIndex = 0;
             // 
             // ownerPage
             // 
             ownerPage.Controls.Add(groupBox1);
             ownerPage.Controls.Add(dataGridOwner);
-            ownerPage.Location = new Point(4, 29);
-            ownerPage.Margin = new Padding(3, 4, 3, 4);
+            ownerPage.Location = new Point(4, 24);
             ownerPage.Name = "ownerPage";
-            ownerPage.Padding = new Padding(3, 4, 3, 4);
-            ownerPage.Size = new Size(879, 436);
+            ownerPage.Padding = new Padding(3);
+            ownerPage.Size = new Size(768, 324);
             ownerPage.TabIndex = 1;
             ownerPage.Text = "Owners";
             ownerPage.UseVisualStyleBackColor = true;
@@ -297,11 +285,9 @@
             // groupBox1
             // 
             groupBox1.Controls.Add(flowLayoutPanel3);
-            groupBox1.Location = new Point(6, 7);
-            groupBox1.Margin = new Padding(3, 4, 3, 4);
+            groupBox1.Location = new Point(5, 5);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 4, 3, 4);
-            groupBox1.Size = new Size(867, 84);
+            groupBox1.Size = new Size(759, 63);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Filter";
@@ -314,48 +300,44 @@
             flowLayoutPanel3.Controls.Add(btnApplyOwner);
             flowLayoutPanel3.Controls.Add(btnClearOwner);
             flowLayoutPanel3.Dock = DockStyle.Fill;
-            flowLayoutPanel3.Location = new Point(3, 24);
-            flowLayoutPanel3.Margin = new Padding(3, 4, 3, 4);
+            flowLayoutPanel3.Location = new Point(3, 19);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
-            flowLayoutPanel3.Size = new Size(861, 56);
+            flowLayoutPanel3.Size = new Size(753, 41);
             flowLayoutPanel3.TabIndex = 1;
             // 
             // label7
             // 
             label7.Anchor = AnchorStyles.Left;
             label7.AutoSize = true;
-            label7.Location = new Point(3, 9);
+            label7.Location = new Point(3, 7);
             label7.Name = "label7";
-            label7.Size = new Size(56, 20);
+            label7.Size = new Size(45, 15);
             label7.TabIndex = 0;
             label7.Text = "Search:";
             // 
             // searchOwner
             // 
             searchOwner.Anchor = AnchorStyles.Left;
-            searchOwner.Location = new Point(65, 6);
-            searchOwner.Margin = new Padding(3, 4, 3, 4);
+            searchOwner.Location = new Point(54, 3);
             searchOwner.Name = "searchOwner";
-            searchOwner.Size = new Size(171, 27);
+            searchOwner.Size = new Size(150, 23);
             searchOwner.TabIndex = 1;
             // 
             // comboDepartment
             // 
             comboDepartment.DropDownStyle = ComboBoxStyle.DropDownList;
             comboDepartment.FormattingEnabled = true;
-            comboDepartment.Location = new Point(242, 4);
-            comboDepartment.Margin = new Padding(3, 4, 3, 4);
+            comboDepartment.Location = new Point(210, 3);
             comboDepartment.Name = "comboDepartment";
-            comboDepartment.Size = new Size(171, 28);
+            comboDepartment.Size = new Size(150, 23);
             comboDepartment.TabIndex = 4;
             // 
             // btnApplyOwner
             // 
             btnApplyOwner.Anchor = AnchorStyles.Left;
-            btnApplyOwner.Location = new Point(419, 4);
-            btnApplyOwner.Margin = new Padding(3, 4, 3, 4);
+            btnApplyOwner.Location = new Point(366, 3);
             btnApplyOwner.Name = "btnApplyOwner";
-            btnApplyOwner.Size = new Size(86, 31);
+            btnApplyOwner.Size = new Size(75, 23);
             btnApplyOwner.TabIndex = 2;
             btnApplyOwner.Text = "Apply";
             btnApplyOwner.UseVisualStyleBackColor = true;
@@ -363,10 +345,9 @@
             // btnClearOwner
             // 
             btnClearOwner.Anchor = AnchorStyles.Left;
-            btnClearOwner.Location = new Point(511, 4);
-            btnClearOwner.Margin = new Padding(3, 4, 3, 4);
+            btnClearOwner.Location = new Point(447, 3);
             btnClearOwner.Name = "btnClearOwner";
-            btnClearOwner.Size = new Size(86, 31);
+            btnClearOwner.Size = new Size(75, 23);
             btnClearOwner.TabIndex = 3;
             btnClearOwner.Text = "Clear";
             btnClearOwner.UseVisualStyleBackColor = true;
@@ -374,22 +355,20 @@
             // dataGridOwner
             // 
             dataGridOwner.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridOwner.Location = new Point(6, 99);
-            dataGridOwner.Margin = new Padding(3, 4, 3, 4);
+            dataGridOwner.Location = new Point(5, 74);
             dataGridOwner.Name = "dataGridOwner";
             dataGridOwner.RowHeadersWidth = 51;
-            dataGridOwner.Size = new Size(867, 328);
+            dataGridOwner.Size = new Size(759, 246);
             dataGridOwner.TabIndex = 2;
             // 
             // supplierPage
             // 
             supplierPage.Controls.Add(groupBox3);
             supplierPage.Controls.Add(dataGridSupplier);
-            supplierPage.Location = new Point(4, 29);
-            supplierPage.Margin = new Padding(3, 4, 3, 4);
+            supplierPage.Location = new Point(4, 24);
             supplierPage.Name = "supplierPage";
-            supplierPage.Padding = new Padding(3, 4, 3, 4);
-            supplierPage.Size = new Size(879, 436);
+            supplierPage.Padding = new Padding(3);
+            supplierPage.Size = new Size(768, 324);
             supplierPage.TabIndex = 2;
             supplierPage.Text = "Suppliers";
             supplierPage.UseVisualStyleBackColor = true;
@@ -397,11 +376,9 @@
             // groupBox3
             // 
             groupBox3.Controls.Add(flowLayoutPanel2);
-            groupBox3.Location = new Point(6, 7);
-            groupBox3.Margin = new Padding(3, 4, 3, 4);
+            groupBox3.Location = new Point(5, 5);
             groupBox3.Name = "groupBox3";
-            groupBox3.Padding = new Padding(3, 4, 3, 4);
-            groupBox3.Size = new Size(867, 84);
+            groupBox3.Size = new Size(759, 63);
             groupBox3.TabIndex = 3;
             groupBox3.TabStop = false;
             groupBox3.Text = "Filter";
@@ -413,38 +390,35 @@
             flowLayoutPanel2.Controls.Add(btnApplySupplier);
             flowLayoutPanel2.Controls.Add(btnClearSupplier);
             flowLayoutPanel2.Dock = DockStyle.Fill;
-            flowLayoutPanel2.Location = new Point(3, 24);
-            flowLayoutPanel2.Margin = new Padding(3, 4, 3, 4);
+            flowLayoutPanel2.Location = new Point(3, 19);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(861, 56);
+            flowLayoutPanel2.Size = new Size(753, 41);
             flowLayoutPanel2.TabIndex = 1;
             // 
             // label6
             // 
             label6.Anchor = AnchorStyles.Left;
             label6.AutoSize = true;
-            label6.Location = new Point(3, 9);
+            label6.Location = new Point(3, 7);
             label6.Name = "label6";
-            label6.Size = new Size(56, 20);
+            label6.Size = new Size(45, 15);
             label6.TabIndex = 0;
             label6.Text = "Search:";
             // 
             // searchSupplier
             // 
             searchSupplier.Anchor = AnchorStyles.Left;
-            searchSupplier.Location = new Point(65, 6);
-            searchSupplier.Margin = new Padding(3, 4, 3, 4);
+            searchSupplier.Location = new Point(54, 3);
             searchSupplier.Name = "searchSupplier";
-            searchSupplier.Size = new Size(171, 27);
+            searchSupplier.Size = new Size(150, 23);
             searchSupplier.TabIndex = 1;
             // 
             // btnApplySupplier
             // 
             btnApplySupplier.Anchor = AnchorStyles.Left;
-            btnApplySupplier.Location = new Point(242, 4);
-            btnApplySupplier.Margin = new Padding(3, 4, 3, 4);
+            btnApplySupplier.Location = new Point(210, 3);
             btnApplySupplier.Name = "btnApplySupplier";
-            btnApplySupplier.Size = new Size(86, 31);
+            btnApplySupplier.Size = new Size(75, 23);
             btnApplySupplier.TabIndex = 2;
             btnApplySupplier.Text = "Apply";
             btnApplySupplier.UseVisualStyleBackColor = true;
@@ -452,10 +426,9 @@
             // btnClearSupplier
             // 
             btnClearSupplier.Anchor = AnchorStyles.Left;
-            btnClearSupplier.Location = new Point(334, 4);
-            btnClearSupplier.Margin = new Padding(3, 4, 3, 4);
+            btnClearSupplier.Location = new Point(291, 3);
             btnClearSupplier.Name = "btnClearSupplier";
-            btnClearSupplier.Size = new Size(86, 31);
+            btnClearSupplier.Size = new Size(75, 23);
             btnClearSupplier.TabIndex = 3;
             btnClearSupplier.Text = "Clear";
             btnClearSupplier.UseVisualStyleBackColor = true;
@@ -463,22 +436,20 @@
             // dataGridSupplier
             // 
             dataGridSupplier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridSupplier.Location = new Point(6, 99);
-            dataGridSupplier.Margin = new Padding(3, 4, 3, 4);
+            dataGridSupplier.Location = new Point(5, 74);
             dataGridSupplier.Name = "dataGridSupplier";
             dataGridSupplier.RowHeadersWidth = 51;
-            dataGridSupplier.Size = new Size(867, 328);
+            dataGridSupplier.Size = new Size(759, 246);
             dataGridSupplier.TabIndex = 2;
             // 
             // departmentPage
             // 
             departmentPage.Controls.Add(groupBox4);
             departmentPage.Controls.Add(dataGridDepartment);
-            departmentPage.Location = new Point(4, 29);
-            departmentPage.Margin = new Padding(3, 4, 3, 4);
+            departmentPage.Location = new Point(4, 24);
             departmentPage.Name = "departmentPage";
-            departmentPage.Padding = new Padding(3, 4, 3, 4);
-            departmentPage.Size = new Size(879, 436);
+            departmentPage.Padding = new Padding(3);
+            departmentPage.Size = new Size(768, 324);
             departmentPage.TabIndex = 3;
             departmentPage.Text = "Departments";
             departmentPage.UseVisualStyleBackColor = true;
@@ -486,11 +457,9 @@
             // groupBox4
             // 
             groupBox4.Controls.Add(flowLayoutPanel1);
-            groupBox4.Location = new Point(6, 7);
-            groupBox4.Margin = new Padding(3, 4, 3, 4);
+            groupBox4.Location = new Point(5, 5);
             groupBox4.Name = "groupBox4";
-            groupBox4.Padding = new Padding(3, 4, 3, 4);
-            groupBox4.Size = new Size(867, 84);
+            groupBox4.Size = new Size(759, 63);
             groupBox4.TabIndex = 3;
             groupBox4.TabStop = false;
             groupBox4.Text = "Filter";
@@ -502,38 +471,35 @@
             flowLayoutPanel1.Controls.Add(btnApplyDepartment);
             flowLayoutPanel1.Controls.Add(btnClearDepartment);
             flowLayoutPanel1.Dock = DockStyle.Fill;
-            flowLayoutPanel1.Location = new Point(3, 24);
-            flowLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
+            flowLayoutPanel1.Location = new Point(3, 19);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(861, 56);
+            flowLayoutPanel1.Size = new Size(753, 41);
             flowLayoutPanel1.TabIndex = 0;
             // 
             // label5
             // 
             label5.Anchor = AnchorStyles.Left;
             label5.AutoSize = true;
-            label5.Location = new Point(3, 9);
+            label5.Location = new Point(3, 7);
             label5.Name = "label5";
-            label5.Size = new Size(56, 20);
+            label5.Size = new Size(45, 15);
             label5.TabIndex = 0;
             label5.Text = "Search:";
             // 
             // searchDepartment
             // 
             searchDepartment.Anchor = AnchorStyles.Left;
-            searchDepartment.Location = new Point(65, 6);
-            searchDepartment.Margin = new Padding(3, 4, 3, 4);
+            searchDepartment.Location = new Point(54, 3);
             searchDepartment.Name = "searchDepartment";
-            searchDepartment.Size = new Size(171, 27);
+            searchDepartment.Size = new Size(150, 23);
             searchDepartment.TabIndex = 1;
             // 
             // btnApplyDepartment
             // 
             btnApplyDepartment.Anchor = AnchorStyles.Left;
-            btnApplyDepartment.Location = new Point(242, 4);
-            btnApplyDepartment.Margin = new Padding(3, 4, 3, 4);
+            btnApplyDepartment.Location = new Point(210, 3);
             btnApplyDepartment.Name = "btnApplyDepartment";
-            btnApplyDepartment.Size = new Size(86, 31);
+            btnApplyDepartment.Size = new Size(75, 23);
             btnApplyDepartment.TabIndex = 2;
             btnApplyDepartment.Text = "Apply";
             btnApplyDepartment.UseVisualStyleBackColor = true;
@@ -541,10 +507,9 @@
             // btnClearDepartment
             // 
             btnClearDepartment.Anchor = AnchorStyles.Left;
-            btnClearDepartment.Location = new Point(334, 4);
-            btnClearDepartment.Margin = new Padding(3, 4, 3, 4);
+            btnClearDepartment.Location = new Point(291, 3);
             btnClearDepartment.Name = "btnClearDepartment";
-            btnClearDepartment.Size = new Size(86, 31);
+            btnClearDepartment.Size = new Size(75, 23);
             btnClearDepartment.TabIndex = 3;
             btnClearDepartment.Text = "Clear";
             btnClearDepartment.UseVisualStyleBackColor = true;
@@ -552,11 +517,10 @@
             // dataGridDepartment
             // 
             dataGridDepartment.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridDepartment.Location = new Point(6, 99);
-            dataGridDepartment.Margin = new Padding(3, 4, 3, 4);
+            dataGridDepartment.Location = new Point(5, 74);
             dataGridDepartment.Name = "dataGridDepartment";
             dataGridDepartment.RowHeadersWidth = 51;
-            dataGridDepartment.Size = new Size(867, 328);
+            dataGridDepartment.Size = new Size(759, 246);
             dataGridDepartment.TabIndex = 2;
             // 
             // tableLayoutPanel1
@@ -569,13 +533,12 @@
             tableLayoutPanel1.Controls.Add(lblTotalLicenses, 1, 0);
             tableLayoutPanel1.Controls.Add(lblExpire30Days, 1, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(2, 3);
-            tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
+            tableLayoutPanel1.Location = new Point(2, 2);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(183, 43);
+            tableLayoutPanel1.Size = new Size(160, 33);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -584,7 +547,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
-            label1.Size = new Size(100, 21);
+            label1.Size = new Size(79, 16);
             label1.TabIndex = 0;
             label1.Text = "Total licenses:";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -593,9 +556,9 @@
             // 
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             label2.AutoSize = true;
-            label2.Location = new Point(3, 21);
+            label2.Location = new Point(3, 16);
             label2.Name = "label2";
-            label2.Size = new Size(129, 22);
+            label2.Size = new Size(102, 17);
             label2.TabIndex = 1;
             label2.Text = "Expires in 30 days:";
             label2.TextAlign = ContentAlignment.MiddleCenter;
@@ -604,9 +567,9 @@
             // 
             lblTotalLicenses.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             lblTotalLicenses.AutoSize = true;
-            lblTotalLicenses.Location = new Point(163, 0);
+            lblTotalLicenses.Location = new Point(144, 0);
             lblTotalLicenses.Name = "lblTotalLicenses";
-            lblTotalLicenses.Size = new Size(17, 21);
+            lblTotalLicenses.Size = new Size(13, 16);
             lblTotalLicenses.TabIndex = 2;
             lblTotalLicenses.Text = "0";
             lblTotalLicenses.TextAlign = ContentAlignment.MiddleCenter;
@@ -615,9 +578,9 @@
             // 
             lblExpire30Days.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             lblExpire30Days.AutoSize = true;
-            lblExpire30Days.Location = new Point(163, 21);
+            lblExpire30Days.Location = new Point(144, 16);
             lblExpire30Days.Name = "lblExpire30Days";
-            lblExpire30Days.Size = new Size(17, 22);
+            lblExpire30Days.Size = new Size(13, 17);
             lblExpire30Days.TabIndex = 3;
             lblExpire30Days.Text = "0";
             lblExpire30Days.TextAlign = ContentAlignment.MiddleCenter;
@@ -626,24 +589,22 @@
             // 
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(tableLayoutPanel1);
-            panel1.Location = new Point(711, 532);
-            panel1.Margin = new Padding(3, 4, 3, 4);
+            panel1.Location = new Point(622, 399);
             panel1.Name = "panel1";
-            panel1.Padding = new Padding(2, 3, 2, 3);
-            panel1.Size = new Size(189, 51);
+            panel1.Padding = new Padding(2);
+            panel1.Size = new Size(166, 39);
             panel1.TabIndex = 3;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(800, 450);
             Controls.Add(tabControl);
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 4, 3, 4);
             Name = "MainForm";
             Text = "LicenseHub";
             toolStrip1.ResumeLayout(false);
