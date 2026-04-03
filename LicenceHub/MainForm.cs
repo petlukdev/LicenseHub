@@ -11,7 +11,7 @@ namespace LicenceHub
 
         private void AddEntryEvent(object sender, EventArgs e)
         {
-            Form form = new SupplierForm();
+            Form form = new DepartmentForm();
             form.ShowDialog();
         }
     }
