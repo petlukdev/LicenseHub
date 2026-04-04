@@ -71,6 +71,9 @@ namespace LicenseHub.DB
                       .IsRequired()
                       .HasMaxLength(255);
 
+                entity.HasIndex(e => e.Email)
+                      .IsUnique();
+
                 entity.HasOne(e => e.Department)
                       .WithMany(d => d.Owners)
                       .HasForeignKey(e => e.DepartmentId);
@@ -85,6 +88,9 @@ namespace LicenseHub.DB
                 entity.Property(e => e.ContactEmail)
                       .IsRequired()
                       .HasMaxLength(255);
+
+                entity.HasIndex(e => e.ContactEmail)
+                      .IsUnique();
 
                 entity.Property(e => e.ContactPhone)
                       .IsRequired()
