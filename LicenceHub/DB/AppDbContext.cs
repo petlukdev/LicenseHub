@@ -39,14 +39,13 @@ namespace LicenseHub.DB
                       .IsRequired()
                       .HasConversion<string>();
 
+                entity.HasIndex(e => e.Type);
+
                 entity.Property(e => e.Cost)
                       .IsRequired();
 
                 entity.Property(e => e.ExpirationDate)
                       .IsRequired();
-
-                entity.Property(e => e.ExpirationStatus)
-                      .HasConversion<string>();
 
                 entity.HasOne(e => e.Owner)
                       .WithMany(o => o.Licenses)

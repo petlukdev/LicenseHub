@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace LicenseHub.Models
@@ -12,6 +13,12 @@ namespace LicenseHub.Models
         public LicenseType Type { get; set; }
         public double Cost { get; set; }
         public DateTime ExpirationDate { get; set; }
+        public int OwnerId { get; set; }
+        public required Owner Owner { get; set; }
+        public int SupplierId { get; set; }
+        public required Supplier Supplier { get; set; }
+
+        [NotMapped]
         public ExpirationStatus ExpirationStatus
         {
             get
@@ -22,10 +29,6 @@ namespace LicenseHub.Models
                 return ExpirationStatus.Active;
             }
         }
-        public int OwnerId { get; set; }
-        public required Owner Owner { get; set; }
-        public int SupplierId { get; set; }
-        public required Supplier Supplier { get; set; }
     }
 
     public enum LicenseType
