@@ -1,4 +1,6 @@
+using LicenseHub.DB;
 using LicenseHub.Forms;
+using Microsoft.EntityFrameworkCore;
 
 namespace LicenceHub
 {
@@ -7,6 +9,11 @@ namespace LicenceHub
         public MainForm()
         {
             InitializeComponent();
+
+            using (var context = new AppDbContext())
+            {
+                context.Database.Migrate();
+            }
         }
 
         private void AddEntryEvent(object sender, EventArgs e)
