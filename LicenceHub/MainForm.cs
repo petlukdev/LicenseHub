@@ -1,19 +1,20 @@
 using LicenseHub.DB;
 using LicenseHub.Forms;
+using LicenseHub.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace LicenceHub
 {
     public partial class MainForm : Form
     {
+        private readonly AppDbContext _dbContext;
+
         public MainForm()
         {
             InitializeComponent();
 
-            using (var context = new AppDbContext())
-            {
-                context.Database.Migrate();
-            }
+            _dbContext = new AppDbContext();
+            _dbContext.Database.Migrate();
         }
 
         private void AddEntryEvent(object sender, EventArgs e)
@@ -95,6 +96,37 @@ namespace LicenceHub
                     MessageBoxIcon.Error
                 );
             }
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            PopulateDataGrids();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            _dbContext.Dispose();
+        }
+
+        private void PopulateDataGrids()
+        {
+            _dbContext.Licenses.Load();
+            _dbContext.Owners.Load();
+            _dbContext.Suppliers.Load();
+            _dbContext.Departments.Load();
+
+            dataGridLicense.AutoGenerateColumns = false;
+            dataGridOwner.AutoGenerateColumns = false;
+            dataGridOwner.AutoGenerateColumns = false;
+            dataGridDepartment.AutoGenerateColumns = false;
+
+            dataGridLicense.DataSource = _dbContext.Licenses.Local.ToBindingList();
+            dataGridOwner.DataSource = _dbContext.Owners.Local.ToBindingList();
+            dataGridSupplier.DataSource = _dbContext.Suppliers.Local.ToBindingList();
+            dataGridDepartment.DataSource = _dbContext.Departments.Local.ToBindingList();
         }
     }
 }

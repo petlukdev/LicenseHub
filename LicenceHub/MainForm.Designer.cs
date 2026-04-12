@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             toolStrip1 = new ToolStrip();
             btnAddEntry = new ToolStripButton();
@@ -46,6 +47,18 @@
             btnApplyLicense = new Button();
             btnClearLicense = new Button();
             dataGridLicense = new DataGridView();
+            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            titleDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            keyDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            typeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            costDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            expirationDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            ownerIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            ownerDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            supplierIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            supplierDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            expirationStatusDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            licenseBindingSource = new BindingSource(components);
             ownerPage = new TabPage();
             groupBox1 = new GroupBox();
             flowLayoutPanel3 = new FlowLayoutPanel();
@@ -55,6 +68,7 @@
             btnApplyOwner = new Button();
             btnClearOwner = new Button();
             dataGridOwner = new DataGridView();
+            ownerBindingSource = new BindingSource(components);
             supplierPage = new TabPage();
             groupBox3 = new GroupBox();
             flowLayoutPanel2 = new FlowLayoutPanel();
@@ -63,6 +77,7 @@
             btnApplySupplier = new Button();
             btnClearSupplier = new Button();
             dataGridSupplier = new DataGridView();
+            supplierBindingSource = new BindingSource(components);
             departmentPage = new TabPage();
             groupBox4 = new GroupBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
@@ -71,30 +86,50 @@
             btnApplyDepartment = new Button();
             btnClearDepartment = new Button();
             dataGridDepartment = new DataGridView();
+            departmentBindingSource = new BindingSource(components);
             tableLayoutPanel1 = new TableLayoutPanel();
             label1 = new Label();
             label2 = new Label();
             lblTotalLicenses = new Label();
             lblExpire30Days = new Label();
             panel1 = new Panel();
+            idDataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            nameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            ownersDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            idDataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            contactEmailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            contactPhoneDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            licensesDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            firstNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            lastNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            emailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            departmentIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            departmentDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            licensesDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             toolStrip1.SuspendLayout();
             tabControl.SuspendLayout();
             licensePage.SuspendLayout();
             groupBox2.SuspendLayout();
             flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridLicense).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)licenseBindingSource).BeginInit();
             ownerPage.SuspendLayout();
             groupBox1.SuspendLayout();
             flowLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridOwner).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)ownerBindingSource).BeginInit();
             supplierPage.SuspendLayout();
             groupBox3.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridSupplier).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)supplierBindingSource).BeginInit();
             departmentPage.SuspendLayout();
             groupBox4.SuspendLayout();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridDepartment).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)departmentBindingSource).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -263,12 +298,115 @@
             // 
             // dataGridLicense
             // 
+            dataGridLicense.AllowUserToAddRows = false;
+            dataGridLicense.AllowUserToDeleteRows = false;
+            dataGridLicense.AutoGenerateColumns = false;
+            dataGridLicense.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dataGridLicense.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridLicense.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, titleDataGridViewTextBoxColumn, keyDataGridViewTextBoxColumn, typeDataGridViewTextBoxColumn, costDataGridViewTextBoxColumn, expirationDateDataGridViewTextBoxColumn, ownerIdDataGridViewTextBoxColumn, ownerDataGridViewTextBoxColumn, supplierIdDataGridViewTextBoxColumn, supplierDataGridViewTextBoxColumn, expirationStatusDataGridViewTextBoxColumn });
+            dataGridLicense.DataSource = licenseBindingSource;
             dataGridLicense.Location = new Point(5, 91);
             dataGridLicense.Name = "dataGridLicense";
+            dataGridLicense.ReadOnly = true;
             dataGridLicense.RowHeadersWidth = 51;
             dataGridLicense.Size = new Size(759, 229);
             dataGridLicense.TabIndex = 0;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            idDataGridViewTextBoxColumn.ReadOnly = true;
+            idDataGridViewTextBoxColumn.Visible = false;
+            idDataGridViewTextBoxColumn.Width = 42;
+            // 
+            // titleDataGridViewTextBoxColumn
+            // 
+            titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+            titleDataGridViewTextBoxColumn.HeaderText = "Title";
+            titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+            titleDataGridViewTextBoxColumn.ReadOnly = true;
+            titleDataGridViewTextBoxColumn.Width = 54;
+            // 
+            // keyDataGridViewTextBoxColumn
+            // 
+            keyDataGridViewTextBoxColumn.DataPropertyName = "Key";
+            keyDataGridViewTextBoxColumn.HeaderText = "Key";
+            keyDataGridViewTextBoxColumn.Name = "keyDataGridViewTextBoxColumn";
+            keyDataGridViewTextBoxColumn.ReadOnly = true;
+            keyDataGridViewTextBoxColumn.Width = 51;
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
+            typeDataGridViewTextBoxColumn.HeaderText = "Type";
+            typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            typeDataGridViewTextBoxColumn.ReadOnly = true;
+            typeDataGridViewTextBoxColumn.Width = 56;
+            // 
+            // costDataGridViewTextBoxColumn
+            // 
+            costDataGridViewTextBoxColumn.DataPropertyName = "Cost";
+            costDataGridViewTextBoxColumn.HeaderText = "Cost";
+            costDataGridViewTextBoxColumn.Name = "costDataGridViewTextBoxColumn";
+            costDataGridViewTextBoxColumn.ReadOnly = true;
+            costDataGridViewTextBoxColumn.Width = 56;
+            // 
+            // expirationDateDataGridViewTextBoxColumn
+            // 
+            expirationDateDataGridViewTextBoxColumn.DataPropertyName = "ExpirationDate";
+            expirationDateDataGridViewTextBoxColumn.HeaderText = "ExpirationDate";
+            expirationDateDataGridViewTextBoxColumn.Name = "expirationDateDataGridViewTextBoxColumn";
+            expirationDateDataGridViewTextBoxColumn.ReadOnly = true;
+            expirationDateDataGridViewTextBoxColumn.Width = 109;
+            // 
+            // ownerIdDataGridViewTextBoxColumn
+            // 
+            ownerIdDataGridViewTextBoxColumn.DataPropertyName = "OwnerId";
+            ownerIdDataGridViewTextBoxColumn.HeaderText = "OwnerId";
+            ownerIdDataGridViewTextBoxColumn.Name = "ownerIdDataGridViewTextBoxColumn";
+            ownerIdDataGridViewTextBoxColumn.ReadOnly = true;
+            ownerIdDataGridViewTextBoxColumn.Visible = false;
+            ownerIdDataGridViewTextBoxColumn.Width = 77;
+            // 
+            // ownerDataGridViewTextBoxColumn
+            // 
+            ownerDataGridViewTextBoxColumn.DataPropertyName = "Owner";
+            ownerDataGridViewTextBoxColumn.HeaderText = "Owner";
+            ownerDataGridViewTextBoxColumn.Name = "ownerDataGridViewTextBoxColumn";
+            ownerDataGridViewTextBoxColumn.ReadOnly = true;
+            ownerDataGridViewTextBoxColumn.Width = 67;
+            // 
+            // supplierIdDataGridViewTextBoxColumn
+            // 
+            supplierIdDataGridViewTextBoxColumn.DataPropertyName = "SupplierId";
+            supplierIdDataGridViewTextBoxColumn.HeaderText = "SupplierId";
+            supplierIdDataGridViewTextBoxColumn.Name = "supplierIdDataGridViewTextBoxColumn";
+            supplierIdDataGridViewTextBoxColumn.ReadOnly = true;
+            supplierIdDataGridViewTextBoxColumn.Visible = false;
+            supplierIdDataGridViewTextBoxColumn.Width = 85;
+            // 
+            // supplierDataGridViewTextBoxColumn
+            // 
+            supplierDataGridViewTextBoxColumn.DataPropertyName = "Supplier";
+            supplierDataGridViewTextBoxColumn.HeaderText = "Supplier";
+            supplierDataGridViewTextBoxColumn.Name = "supplierDataGridViewTextBoxColumn";
+            supplierDataGridViewTextBoxColumn.ReadOnly = true;
+            supplierDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // expirationStatusDataGridViewTextBoxColumn
+            // 
+            expirationStatusDataGridViewTextBoxColumn.DataPropertyName = "ExpirationStatus";
+            expirationStatusDataGridViewTextBoxColumn.HeaderText = "ExpirationStatus";
+            expirationStatusDataGridViewTextBoxColumn.Name = "expirationStatusDataGridViewTextBoxColumn";
+            expirationStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            expirationStatusDataGridViewTextBoxColumn.Visible = false;
+            expirationStatusDataGridViewTextBoxColumn.Width = 117;
+            // 
+            // licenseBindingSource
+            // 
+            licenseBindingSource.DataSource = typeof(LicenseHub.Models.License);
             // 
             // ownerPage
             // 
@@ -354,12 +492,23 @@
             // 
             // dataGridOwner
             // 
+            dataGridOwner.AllowUserToAddRows = false;
+            dataGridOwner.AllowUserToDeleteRows = false;
+            dataGridOwner.AutoGenerateColumns = false;
+            dataGridOwner.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridOwner.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridOwner.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn1, firstNameDataGridViewTextBoxColumn, lastNameDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, departmentIdDataGridViewTextBoxColumn, departmentDataGridViewTextBoxColumn, licensesDataGridViewTextBoxColumn });
+            dataGridOwner.DataSource = ownerBindingSource;
             dataGridOwner.Location = new Point(5, 74);
             dataGridOwner.Name = "dataGridOwner";
+            dataGridOwner.ReadOnly = true;
             dataGridOwner.RowHeadersWidth = 51;
             dataGridOwner.Size = new Size(759, 246);
             dataGridOwner.TabIndex = 2;
+            // 
+            // ownerBindingSource
+            // 
+            ownerBindingSource.DataSource = typeof(LicenseHub.Models.Owner);
             // 
             // supplierPage
             // 
@@ -435,12 +584,23 @@
             // 
             // dataGridSupplier
             // 
+            dataGridSupplier.AllowUserToAddRows = false;
+            dataGridSupplier.AllowUserToDeleteRows = false;
+            dataGridSupplier.AutoGenerateColumns = false;
+            dataGridSupplier.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridSupplier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridSupplier.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn2, nameDataGridViewTextBoxColumn, contactEmailDataGridViewTextBoxColumn, contactPhoneDataGridViewTextBoxColumn, licensesDataGridViewTextBoxColumn1 });
+            dataGridSupplier.DataSource = supplierBindingSource;
             dataGridSupplier.Location = new Point(5, 74);
             dataGridSupplier.Name = "dataGridSupplier";
+            dataGridSupplier.ReadOnly = true;
             dataGridSupplier.RowHeadersWidth = 51;
             dataGridSupplier.Size = new Size(759, 246);
             dataGridSupplier.TabIndex = 2;
+            // 
+            // supplierBindingSource
+            // 
+            supplierBindingSource.DataSource = typeof(LicenseHub.Models.Supplier);
             // 
             // departmentPage
             // 
@@ -516,12 +676,23 @@
             // 
             // dataGridDepartment
             // 
+            dataGridDepartment.AllowUserToAddRows = false;
+            dataGridDepartment.AllowUserToDeleteRows = false;
+            dataGridDepartment.AutoGenerateColumns = false;
+            dataGridDepartment.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridDepartment.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridDepartment.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn3, nameDataGridViewTextBoxColumn1, ownersDataGridViewTextBoxColumn });
+            dataGridDepartment.DataSource = departmentBindingSource;
             dataGridDepartment.Location = new Point(5, 74);
             dataGridDepartment.Name = "dataGridDepartment";
+            dataGridDepartment.ReadOnly = true;
             dataGridDepartment.RowHeadersWidth = 51;
             dataGridDepartment.Size = new Size(759, 246);
             dataGridDepartment.TabIndex = 2;
+            // 
+            // departmentBindingSource
+            // 
+            departmentBindingSource.DataSource = typeof(LicenseHub.Models.Department);
             // 
             // tableLayoutPanel1
             // 
@@ -595,6 +766,118 @@
             panel1.Size = new Size(166, 39);
             panel1.TabIndex = 3;
             // 
+            // idDataGridViewTextBoxColumn3
+            // 
+            idDataGridViewTextBoxColumn3.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn3.HeaderText = "Id";
+            idDataGridViewTextBoxColumn3.Name = "idDataGridViewTextBoxColumn3";
+            idDataGridViewTextBoxColumn3.ReadOnly = true;
+            idDataGridViewTextBoxColumn3.Visible = false;
+            // 
+            // nameDataGridViewTextBoxColumn1
+            // 
+            nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn1.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
+            nameDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // ownersDataGridViewTextBoxColumn
+            // 
+            ownersDataGridViewTextBoxColumn.DataPropertyName = "Owners";
+            ownersDataGridViewTextBoxColumn.HeaderText = "Owners";
+            ownersDataGridViewTextBoxColumn.Name = "ownersDataGridViewTextBoxColumn";
+            ownersDataGridViewTextBoxColumn.ReadOnly = true;
+            ownersDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // idDataGridViewTextBoxColumn2
+            // 
+            idDataGridViewTextBoxColumn2.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn2.HeaderText = "Id";
+            idDataGridViewTextBoxColumn2.Name = "idDataGridViewTextBoxColumn2";
+            idDataGridViewTextBoxColumn2.ReadOnly = true;
+            idDataGridViewTextBoxColumn2.Visible = false;
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // contactEmailDataGridViewTextBoxColumn
+            // 
+            contactEmailDataGridViewTextBoxColumn.DataPropertyName = "ContactEmail";
+            contactEmailDataGridViewTextBoxColumn.HeaderText = "ContactEmail";
+            contactEmailDataGridViewTextBoxColumn.Name = "contactEmailDataGridViewTextBoxColumn";
+            contactEmailDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // contactPhoneDataGridViewTextBoxColumn
+            // 
+            contactPhoneDataGridViewTextBoxColumn.DataPropertyName = "ContactPhone";
+            contactPhoneDataGridViewTextBoxColumn.HeaderText = "ContactPhone";
+            contactPhoneDataGridViewTextBoxColumn.Name = "contactPhoneDataGridViewTextBoxColumn";
+            contactPhoneDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // licensesDataGridViewTextBoxColumn1
+            // 
+            licensesDataGridViewTextBoxColumn1.DataPropertyName = "Licenses";
+            licensesDataGridViewTextBoxColumn1.HeaderText = "Licenses";
+            licensesDataGridViewTextBoxColumn1.Name = "licensesDataGridViewTextBoxColumn1";
+            licensesDataGridViewTextBoxColumn1.ReadOnly = true;
+            licensesDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // idDataGridViewTextBoxColumn1
+            // 
+            idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
+            idDataGridViewTextBoxColumn1.HeaderText = "Id";
+            idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
+            idDataGridViewTextBoxColumn1.ReadOnly = true;
+            idDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // firstNameDataGridViewTextBoxColumn
+            // 
+            firstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName";
+            firstNameDataGridViewTextBoxColumn.HeaderText = "FirstName";
+            firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
+            firstNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // lastNameDataGridViewTextBoxColumn
+            // 
+            lastNameDataGridViewTextBoxColumn.DataPropertyName = "LastName";
+            lastNameDataGridViewTextBoxColumn.HeaderText = "LastName";
+            lastNameDataGridViewTextBoxColumn.Name = "lastNameDataGridViewTextBoxColumn";
+            lastNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // emailDataGridViewTextBoxColumn
+            // 
+            emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
+            emailDataGridViewTextBoxColumn.HeaderText = "Email";
+            emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            emailDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // departmentIdDataGridViewTextBoxColumn
+            // 
+            departmentIdDataGridViewTextBoxColumn.DataPropertyName = "DepartmentId";
+            departmentIdDataGridViewTextBoxColumn.HeaderText = "DepartmentId";
+            departmentIdDataGridViewTextBoxColumn.Name = "departmentIdDataGridViewTextBoxColumn";
+            departmentIdDataGridViewTextBoxColumn.ReadOnly = true;
+            departmentIdDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // departmentDataGridViewTextBoxColumn
+            // 
+            departmentDataGridViewTextBoxColumn.DataPropertyName = "Department";
+            departmentDataGridViewTextBoxColumn.HeaderText = "Department";
+            departmentDataGridViewTextBoxColumn.Name = "departmentDataGridViewTextBoxColumn";
+            departmentDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // licensesDataGridViewTextBoxColumn
+            // 
+            licensesDataGridViewTextBoxColumn.DataPropertyName = "Licenses";
+            licensesDataGridViewTextBoxColumn.HeaderText = "Licenses";
+            licensesDataGridViewTextBoxColumn.Name = "licensesDataGridViewTextBoxColumn";
+            licensesDataGridViewTextBoxColumn.ReadOnly = true;
+            licensesDataGridViewTextBoxColumn.Visible = false;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -615,21 +898,25 @@
             flowLayoutPanel4.ResumeLayout(false);
             flowLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridLicense).EndInit();
+            ((System.ComponentModel.ISupportInitialize)licenseBindingSource).EndInit();
             ownerPage.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             flowLayoutPanel3.ResumeLayout(false);
             flowLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridOwner).EndInit();
+            ((System.ComponentModel.ISupportInitialize)ownerBindingSource).EndInit();
             supplierPage.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridSupplier).EndInit();
+            ((System.ComponentModel.ISupportInitialize)supplierBindingSource).EndInit();
             departmentPage.ResumeLayout(false);
             groupBox4.ResumeLayout(false);
             flowLayoutPanel1.ResumeLayout(false);
             flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridDepartment).EndInit();
+            ((System.ComponentModel.ISupportInitialize)departmentBindingSource).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             panel1.ResumeLayout(false);
@@ -686,5 +973,35 @@
         private ComboBox comboSupplier;
         private Button btnApplyLicense;
         private Button btnClearLicense;
+        private BindingSource licenseBindingSource;
+        private BindingSource ownerBindingSource;
+        private BindingSource supplierBindingSource;
+        private BindingSource departmentBindingSource;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn keyDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn costDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn expirationDateDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn ownerIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn ownerDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn supplierIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn supplierDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn expirationStatusDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn departmentIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn departmentDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn licensesDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn contactEmailDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn contactPhoneDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn licensesDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn ownersDataGridViewTextBoxColumn;
     }
 }
