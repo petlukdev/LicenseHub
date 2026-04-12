@@ -13,5 +13,10 @@ namespace LicenseHub.Models
         public int? DepartmentId { get; set; }
         public Department? Department { get; set; }
         public ICollection<License> Licenses { get; } = [];
+
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName}";
+        }
     }
 }

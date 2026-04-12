@@ -12,5 +12,10 @@ namespace LicenseHub.Models
         public required string ContactEmail { get; set; }
         public required string ContactPhone { get; set; }
         public ICollection<License> Licenses { get; } = [];
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

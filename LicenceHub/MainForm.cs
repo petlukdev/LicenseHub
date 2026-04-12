@@ -1,4 +1,5 @@
 using LicenseHub.DB;
+using LicenseHub.Extensions;
 using LicenseHub.Forms;
 using LicenseHub.Models;
 using Microsoft.EntityFrameworkCore;
@@ -103,6 +104,7 @@ namespace LicenceHub
             base.OnLoad(e);
 
             PopulateDataGrids();
+            PopulateCombos();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -120,13 +122,43 @@ namespace LicenceHub
 
             dataGridLicense.AutoGenerateColumns = false;
             dataGridOwner.AutoGenerateColumns = false;
-            dataGridOwner.AutoGenerateColumns = false;
+            dataGridSupplier.AutoGenerateColumns = false;
             dataGridDepartment.AutoGenerateColumns = false;
 
             dataGridLicense.DataSource = _dbContext.Licenses.Local.ToBindingList();
             dataGridOwner.DataSource = _dbContext.Owners.Local.ToBindingList();
             dataGridSupplier.DataSource = _dbContext.Suppliers.Local.ToBindingList();
             dataGridDepartment.DataSource = _dbContext.Departments.Local.ToBindingList();
+        }
+
+        private void PopulateCombos()
+        {
+            comboOwner.Setup(
+                _dbContext.Owners.Local,
+                o => new FilterItem { Id = o.Id, Text = o.ToString()},
+                "All Owners"
+            );
+
+            comboSupplier.Setup(
+                _dbContext.Suppliers.Local,
+                s => new FilterItem { Id = s.Id, Text = s.Name },
+                "All Suppliers"
+            );
+
+            comboDepartment.Setup(
+                _dbContext.Departments.Local,
+                d => new FilterItem { Id = d.Id, Text = d.Name },
+                "All Departments"
+            );
+
+            List<string> types = Enum.GetNames<LicenseType>().ToList();
+            types.Insert(0, "All Types");
+
+            List<string> statuses = Enum.GetNames<ExpirationStatus>().ToList();
+            statuses.Insert(0, "All Statuses");
+
+            comboTypeLicense.DataSource = types;
+            comboExpiration.DataSource = statuses;
         }
     }
 }
