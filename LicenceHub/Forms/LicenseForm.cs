@@ -15,6 +15,19 @@ namespace LicenseHub.Forms
             InitializeComponent();
         }
 
+        public LicenseForm(License license) : this()
+        {
+            ArgumentNullException.ThrowIfNull(license, nameof(license));
+
+            txtTitle.Text = license.Title;
+            txtKey.Text = license.Key;
+            comboType.SelectedItem = license.Type;
+            numPrice.Value = (decimal)license.Cost;
+            datePicker.Value = license.ExpirationDate;
+            comboOwner.SelectedItem = license.Owner;
+            comboSupplier.SelectedItem = license.Supplier;
+        }
+
         public License? Result { get; private set; }
     }
 }

@@ -3,6 +3,7 @@ using LicenseHub.Extensions;
 using LicenseHub.Forms;
 using LicenseHub.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace LicenceHub
 {
@@ -61,23 +62,39 @@ namespace LicenceHub
         {
             try
             {
-                Form form = tabControl.SelectedTab?.Name switch
-                {
-                    "licensePage" => new LicenseForm(),
-                    "supplierPage" => new SupplierForm(),
-                    "ownerPage" => new OwnerForm(),
-                    "departmentPage" => new DepartmentForm(),
-                    _ => throw new ArgumentException("Unknown tab selected")
-                };
-
                 DataGridView dataGridView = tabControl.SelectedTab?.Controls.OfType<DataGridView>().FirstOrDefault()
                     ?? throw new ArgumentException("No DataGridView found in the selected tab");
 
-                // ...
+                if (dataGridView.SelectedRows.Count == 0) return;
+                if (dataGridView.SelectedRows.Count > 1)
+                    throw new ArgumentException("Multiple rows selected. Please select only one row to modify.");
 
-                if (form.ShowDialog() == DialogResult.Cancel) return;
+                var selectedEntity = dataGridView.SelectedRows[0].DataBoundItem
+                    ?? throw new ArgumentException("Selected row does not have a valid data bound item.");
 
-                // ...
+                switch (tabControl.SelectedTab?.Name)
+                {
+                    case "licensePage":
+                        ModifyEntity<LicenseForm, License>(_dbContext.Licenses, (License)selectedEntity);
+                        break;
+
+                    case "supplierPage":
+                        ModifyEntity<SupplierForm, Supplier>(_dbContext.Suppliers, (Supplier)selectedEntity);
+                        break;
+
+                    case "ownerPage":
+                        ModifyEntity<OwnerForm, Owner>(_dbContext.Owners, (Owner)selectedEntity);
+                        break;
+
+                    case "departmentPage":
+                        ModifyEntity<DepartmentForm, Department>(_dbContext.Departments, (Department)selectedEntity);
+                        break;
+
+                    default:
+                        throw new ArgumentException("Unknown tab selected");
+                }
+
+                _dbContext.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -204,15 +221,34 @@ namespace LicenceHub
             {
                 if (form.ShowDialog() == DialogResult.Cancel) return;
 
-                var resultProperty = typeof(TForm).GetProperty("Result");
-                if (resultProperty == null)
-                    throw new ArgumentException("The form does not have a Result property.");
+                var resultProperty = typeof(TForm).GetProperty("Result")
+                    ?? throw new ArgumentException("The form does not have a Result property.");
 
-                var result = resultProperty.GetValue(form) as TEntity;
-                if (result == null)
-                    throw new ArgumentNullException("Result is null!");
+                var result = resultProperty.GetValue(form) as TEntity
+                    ?? throw new ArgumentNullException("Result is null!");
 
                 dbSet.Add(result);
+            }
+        }
+
+        private void ModifyEntity<TForm, TEntity>(DbSet<TEntity> dbSet, TEntity entity)
+            where TForm : Form, new()
+            where TEntity : class
+        {
+            ConstructorInfo constructor = typeof(TForm).GetConstructor([typeof(TEntity)])
+                ?? throw new ArgumentException("The form does not have a constructor that accepts the entity.");
+
+            using (var form = (TForm)constructor.Invoke(new object[] { entity }))
+            {
+                if (form.ShowDialog() == DialogResult.Cancel) return;
+
+                var resultProperty = typeof(TForm).GetProperty("Result")
+                    ?? throw new ArgumentException("The form does not have a Result property.");
+
+                var result = resultProperty.GetValue(form) as TEntity
+                    ?? throw new ArgumentNullException("Result is null!");
+
+                dbSet.Update(result);
             }
         }
     }

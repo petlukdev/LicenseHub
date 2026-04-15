@@ -16,6 +16,15 @@ namespace LicenseHub.Forms
             InitializeComponent();
         }
 
+        public OwnerForm(Owner owner) : this()
+        {
+            ArgumentNullException.ThrowIfNull(owner, nameof(owner));
+
+            txtFirstName.Text = owner.FirstName;
+            txtLastName.Text = owner.LastName;
+            txtEmail.Text = owner.Email;
+        }
+
         public Owner? Result { get; private set; }
     }
 }

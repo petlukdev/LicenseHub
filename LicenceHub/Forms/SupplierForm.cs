@@ -16,6 +16,15 @@ namespace LicenseHub.Forms
             InitializeComponent();
         }
 
+        public SupplierForm(Supplier supplier) : this()
+        {
+            ArgumentNullException.ThrowIfNull(supplier, nameof(supplier));
+
+            txtName.Text = supplier.Name;
+            txtEmail.Text = supplier.ContactEmail;
+            txtNumber.Text = supplier.ContactPhone;
+        }
+
         public Supplier? Result { get; private set; }
     }
 }

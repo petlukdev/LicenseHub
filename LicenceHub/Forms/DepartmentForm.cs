@@ -16,6 +16,12 @@ namespace LicenseHub.Forms
             InitializeComponent();
         }
 
+        public DepartmentForm(Department department) : this()
+        {
+            ArgumentNullException.ThrowIfNull(department, nameof(department));
+            txtName.Text = department.Name;
+        }
+
         public Department? Result { get; private set; }
     }
 }
