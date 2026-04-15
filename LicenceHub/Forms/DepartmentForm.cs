@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LicenseHub.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,5 +15,7 @@ namespace LicenseHub.Forms
         {
             InitializeComponent();
         }
+
+        public Department? Result { get; private set; }
     }
 }

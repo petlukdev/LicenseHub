@@ -22,18 +22,29 @@ namespace LicenceHub
         {
             try
             {
-                Form form = tabControl.SelectedTab?.Name switch
+                switch (tabControl.SelectedTab?.Name)
                 {
-                    "licensePage" => new LicenseForm(),
-                    "supplierPage" => new SupplierForm(),
-                    "ownerPage" => new OwnerForm(),
-                    "departmentPage" => new DepartmentForm(),
-                    _ => throw new ArgumentException("Unknown tab selected")
-                };
+                    case "licensePage":
+                        AddEntity<LicenseForm, License>(_dbContext.Licenses);
+                        break;
 
-                if (form.ShowDialog() == DialogResult.Cancel) return;
+                    case "supplierPage":
+                        AddEntity<SupplierForm, Supplier>(_dbContext.Suppliers);
+                        break;
 
-                // ...
+                    case "ownerPage":
+                        AddEntity<OwnerForm, Owner>(_dbContext.Owners);
+                        break;
+
+                    case "departmentPage":
+                        AddEntity<DepartmentForm, Department>(_dbContext.Departments);
+                        break;
+
+                    default:
+                        throw new ArgumentException("Unknown tab selected");
+                }
+
+                _dbContext.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -159,6 +170,26 @@ namespace LicenceHub
 
             comboTypeLicense.DataSource = types;
             comboExpiration.DataSource = statuses;
+        }
+
+        private void AddEntity<TForm, TEntity>(DbSet<TEntity> dbSet)
+            where TForm : Form, new()
+            where TEntity : class
+        {
+            using (var form = new TForm())
+            {
+                if (form.ShowDialog() == DialogResult.Cancel) return;
+
+                var resultProperty = typeof(TForm).GetProperty("Result");
+                if (resultProperty == null)
+                    throw new ArgumentException("The form does not have a Result property.");
+
+                var result = resultProperty.GetValue(form) as TEntity;
+                if (result == null)
+                    throw new ArgumentNullException("Result is null!");
+
+                dbSet.Add(result);
+            }
         }
     }
 }

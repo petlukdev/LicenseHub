@@ -1,6 +1,6 @@
-﻿using System;
+﻿using LicenseHub.Models;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
@@ -14,5 +14,7 @@ namespace LicenseHub.Forms
         {
             InitializeComponent();
         }
+
+        public License? Result { get; private set; }
     }
 }
