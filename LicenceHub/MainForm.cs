@@ -19,6 +19,20 @@ namespace LicenceHub
             _dbContext.Database.Migrate();
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            PopulateDataGrids();
+            PopulateCombos();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            _dbContext.Dispose();
+        }
+
         private void AddEntryEvent(object sender, EventArgs e)
         {
             try
@@ -151,18 +165,43 @@ namespace LicenceHub
             }
         }
 
-        protected override void OnLoad(EventArgs e)
+        private void AddEntity<TForm, TEntity>(DbSet<TEntity> dbSet)
+            where TForm : Form, new()
+            where TEntity : class
         {
-            base.OnLoad(e);
+            using (var form = new TForm())
+            {
+                if (form.ShowDialog() == DialogResult.Cancel) return;
 
-            PopulateDataGrids();
-            PopulateCombos();
+                var resultProperty = typeof(TForm).GetProperty("Result")
+                    ?? throw new ArgumentException("The form does not have a Result property.");
+
+                var result = resultProperty.GetValue(form) as TEntity
+                    ?? throw new ArgumentNullException("Result is null!");
+
+                dbSet.Add(result);
+            }
         }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
+        private void ModifyEntity<TForm, TEntity>(DbSet<TEntity> dbSet, TEntity entity)
+            where TForm : Form, new()
+            where TEntity : class
         {
-            base.OnFormClosing(e);
-            _dbContext.Dispose();
+            ConstructorInfo constructor = typeof(TForm).GetConstructor([typeof(TEntity)])
+                ?? throw new ArgumentException("The form does not have a constructor that accepts the entity.");
+
+            using (var form = (TForm)constructor.Invoke(new object[] { entity }))
+            {
+                if (form.ShowDialog() == DialogResult.Cancel) return;
+
+                var resultProperty = typeof(TForm).GetProperty("Result")
+                    ?? throw new ArgumentException("The form does not have a Result property.");
+
+                var result = resultProperty.GetValue(form) as TEntity
+                    ?? throw new ArgumentNullException("Result is null!");
+
+                dbSet.Update(result);
+            }
         }
 
         private void PopulateDataGrids()
@@ -211,45 +250,6 @@ namespace LicenceHub
 
             comboTypeLicense.DataSource = types;
             comboExpiration.DataSource = statuses;
-        }
-
-        private void AddEntity<TForm, TEntity>(DbSet<TEntity> dbSet)
-            where TForm : Form, new()
-            where TEntity : class
-        {
-            using (var form = new TForm())
-            {
-                if (form.ShowDialog() == DialogResult.Cancel) return;
-
-                var resultProperty = typeof(TForm).GetProperty("Result")
-                    ?? throw new ArgumentException("The form does not have a Result property.");
-
-                var result = resultProperty.GetValue(form) as TEntity
-                    ?? throw new ArgumentNullException("Result is null!");
-
-                dbSet.Add(result);
-            }
-        }
-
-        private void ModifyEntity<TForm, TEntity>(DbSet<TEntity> dbSet, TEntity entity)
-            where TForm : Form, new()
-            where TEntity : class
-        {
-            ConstructorInfo constructor = typeof(TForm).GetConstructor([typeof(TEntity)])
-                ?? throw new ArgumentException("The form does not have a constructor that accepts the entity.");
-
-            using (var form = (TForm)constructor.Invoke(new object[] { entity }))
-            {
-                if (form.ShowDialog() == DialogResult.Cancel) return;
-
-                var resultProperty = typeof(TForm).GetProperty("Result")
-                    ?? throw new ArgumentException("The form does not have a Result property.");
-
-                var result = resultProperty.GetValue(form) as TEntity
-                    ?? throw new ArgumentNullException("Result is null!");
-
-                dbSet.Update(result);
-            }
         }
     }
 }
