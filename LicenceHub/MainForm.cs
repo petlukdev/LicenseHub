@@ -97,7 +97,31 @@ namespace LicenceHub
                 DataGridView dataGridView = tabControl.SelectedTab?.Controls.OfType<DataGridView>().FirstOrDefault()
                     ?? throw new ArgumentException("No DataGridView found in the selected tab");
 
-                // ...
+                if (dataGridView.SelectedRows.Count == 0) return;
+
+                foreach (DataGridViewRow row in dataGridView.SelectedRows)
+                {
+                    if (row.DataBoundItem == null) continue;
+                    switch (tabControl.SelectedTab?.Name)
+                    {
+                        case "licensePage":
+                            _dbContext.Licenses.Remove((License)row.DataBoundItem);
+                            break;
+                        case "supplierPage":
+                            _dbContext.Suppliers.Remove((Supplier)row.DataBoundItem);
+                            break;
+                        case "ownerPage":
+                            _dbContext.Owners.Remove((Owner)row.DataBoundItem);
+                            break;
+                        case "departmentPage":
+                            _dbContext.Departments.Remove((Department)row.DataBoundItem);
+                            break;
+                        default:
+                            throw new ArgumentException("Unknown tab selected");
+                    }
+                }
+
+                _dbContext.SaveChanges();
             }
             catch (Exception ex)
             {
