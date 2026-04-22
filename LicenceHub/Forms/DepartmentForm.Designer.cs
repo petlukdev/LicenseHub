@@ -80,6 +80,7 @@
             btnApply.TabIndex = 1;
             btnApply.Text = "Apply";
             btnApply.UseVisualStyleBackColor = true;
+            btnApply.Click += ApplyEvent;
             // 
             // btnCancel
             // 
@@ -90,6 +91,7 @@
             btnCancel.TabIndex = 2;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += CancelEvent;
             // 
             // DepartmentForm
             // 
