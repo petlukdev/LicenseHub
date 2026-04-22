@@ -61,12 +61,7 @@ namespace LicenceHub
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    $"An error occurred while trying to add a new entry.\n\nERROR: {ex.Message}",
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
+                MessageViewer.ShowError("An error occurred while trying to add a new entry.", ex.Message);
             }
         }
 
@@ -108,12 +103,7 @@ namespace LicenceHub
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    $"An error occurred while trying to modify an entry.\n\nERROR: {ex.Message}",
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
+                MessageViewer.ShowError("An error occurred while trying to modify an entry.", ex.Message);
             }
         }
 
@@ -152,12 +142,7 @@ namespace LicenceHub
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    $"An error occurred while trying to delete an entry.\n\nERROR: {ex.Message}",
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
+                MessageViewer.ShowError("An error occurred while trying to delete an entry.", ex.Message);
             }
         }
 

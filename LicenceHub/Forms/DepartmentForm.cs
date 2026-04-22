@@ -1,4 +1,5 @@
-﻿using LicenseHub.Models;
+﻿using LicenseHub.Extensions;
+using LicenseHub.Models;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
@@ -48,12 +49,7 @@ namespace LicenseHub.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    $"An error occurred while trying to make new department.\n\nERROR: {ex.Message}",
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
+                MessageViewer.ShowError("An error occurred while trying to make new department.", ex.Message);
             }
         }
 
