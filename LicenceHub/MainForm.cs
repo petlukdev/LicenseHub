@@ -58,8 +58,6 @@ namespace LicenceHub
                     default:
                         throw new ArgumentException("Unknown tab selected");
                 }
-
-                _dbContext.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -107,8 +105,6 @@ namespace LicenceHub
                     default:
                         throw new ArgumentException("Unknown tab selected");
                 }
-
-                _dbContext.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -180,6 +176,16 @@ namespace LicenceHub
                     ?? throw new ArgumentNullException("Result is null!");
 
                 dbSet.Add(result);
+
+                try
+                {
+                    _dbContext.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    dbSet.Remove(result); // Rollback the addition if save fails
+                    throw ex.InnerException ?? ex;
+                }
             }
         }
 
@@ -199,8 +205,22 @@ namespace LicenceHub
 
                 var result = resultProperty.GetValue(form) as TEntity
                     ?? throw new ArgumentNullException("Result is null!");
+                
+                try
+                {
+                    _dbContext
+                        .Entry(entity).CurrentValues
+                        .SetValues(result);
 
-                dbSet.Update(result);
+                    _dbContext.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    _dbContext
+                        .Entry(entity).CurrentValues
+                        .SetValues(_dbContext.Entry(entity).OriginalValues);
+                    throw ex.InnerException ?? ex;
+                }
             }
         }
 

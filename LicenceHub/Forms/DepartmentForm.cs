@@ -12,6 +12,8 @@ namespace LicenseHub.Forms
 {
     public partial class DepartmentForm : Form
     {
+        private int _originalId = -1;
+
         public Department? Result { get; private set; }
 
         public DepartmentForm()
@@ -25,6 +27,7 @@ namespace LicenseHub.Forms
             ArgumentNullException.ThrowIfNull(department, nameof(department));
             
             this.Text = "Edit Department";
+            _originalId = department.Id;
             txtName.Text = department.Name;
         }
 
@@ -36,10 +39,11 @@ namespace LicenseHub.Forms
                 if (string.IsNullOrEmpty(name))
                     throw new ArgumentNullException(nameof(name));
 
-                this.Result = new Department
-                {
-                    Name = name
-                };
+                Department department = _originalId == -1
+                    ? new Department { Name = name }
+                    : new Department { Id = _originalId, Name = name };
+
+                this.Result = department;
                 this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
