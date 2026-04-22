@@ -216,15 +216,22 @@ namespace LicenceHub
             _dbContext.Suppliers.Load();
             _dbContext.Departments.Load();
 
-            dataGridLicense.AutoGenerateColumns = false;
-            dataGridOwner.AutoGenerateColumns = false;
-            dataGridSupplier.AutoGenerateColumns = false;
-            dataGridDepartment.AutoGenerateColumns = false;
-
             dataGridLicense.DataSource = _dbContext.Licenses.Local.ToBindingList();
             dataGridOwner.DataSource = _dbContext.Owners.Local.ToBindingList();
             dataGridSupplier.DataSource = _dbContext.Suppliers.Local.ToBindingList();
             dataGridDepartment.DataSource = _dbContext.Departments.Local.ToBindingList();
+
+            DataGridView[] dataGrids = { dataGridLicense, dataGridOwner, dataGridSupplier, dataGridDepartment };
+
+            foreach (var view in dataGrids)
+            {
+                view.AutoGenerateColumns = false;
+                view.DataBindingComplete += (s, e) =>
+                {
+                    view.ClearSelection();
+                    view.CurrentCell = null;
+                };
+            }
         }
 
         private void PopulateCombos()
