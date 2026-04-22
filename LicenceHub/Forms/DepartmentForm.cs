@@ -37,8 +37,11 @@ namespace LicenseHub.Forms
             try
             {
                 string name = txtName.Text.Trim();
+
                 if (string.IsNullOrEmpty(name))
                     throw new ArgumentNullException(nameof(name));
+                if (name.Length > 255)
+                    throw new ArgumentException("Department name cannot be longer than 255 characters.", nameof(name));
 
                 Department department = _originalId == -1
                     ? new Department { Name = name }
