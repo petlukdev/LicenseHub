@@ -35,6 +35,9 @@ namespace LicenseHub.DB
                       .IsRequired()
                       .HasMaxLength(255);
 
+                entity.HasIndex(e => new { e.Key, e.SupplierId })
+                      .IsUnique();
+
                 entity.Property(e => e.Type)
                       .IsRequired()
                       .HasConversion<string>();
@@ -101,6 +104,9 @@ namespace LicenseHub.DB
                 entity.Property(e => e.Name)
                       .IsRequired()
                       .HasMaxLength(255);
+
+                entity.HasIndex(e => e.Name)
+                      .IsUnique();
             });
         }
     }
