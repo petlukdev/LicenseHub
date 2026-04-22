@@ -171,7 +171,7 @@ namespace LicenceHub
         {
             using (var form = new TForm())
             {
-                if (form.ShowDialog() == DialogResult.Cancel) return;
+                if (form.ShowDialog() != DialogResult.OK) return;
 
                 var resultProperty = typeof(TForm).GetProperty("Result")
                     ?? throw new ArgumentException("The form does not have a Result property.");
@@ -192,7 +192,7 @@ namespace LicenceHub
 
             using (var form = (TForm)constructor.Invoke(new object[] { entity }))
             {
-                if (form.ShowDialog() == DialogResult.Cancel) return;
+                if (form.ShowDialog() != DialogResult.OK) return;
 
                 var resultProperty = typeof(TForm).GetProperty("Result")
                     ?? throw new ArgumentException("The form does not have a Result property.");
