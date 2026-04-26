@@ -23,11 +23,11 @@ namespace LicenseHub.Forms
         {
             InitializeComponent();
             this.Text = "Add Owner";
-
             _bindingList = departments;
-            comboDepartment.DataSource = _bindingList;
-            comboDepartment.DisplayMember = "Name";
-            comboDepartment.ValueMember = "Id";
+
+            Department empty = new Department { Id = -1, Name  = "None" };
+
+            comboDepartment.SetupOptionalData(_bindingList, empty);
         }
 
         public OwnerForm(Owner owner, IBindingList departments) : this(departments)
@@ -40,9 +40,13 @@ namespace LicenseHub.Forms
             txtLastName.Text = owner.LastName;
             txtEmail.Text = owner.Email;
 
-            if (owner.Department is not null)
+            if (owner.Department != null)
             {
-                comboDepartment.SelectedItem = owner.Department;
+                comboDepartment.SelectedValue = owner.Department.Id;
+            }
+            else
+            {
+                comboDepartment.SelectedValue = -1;
             }
         }
 
@@ -52,11 +56,18 @@ namespace LicenseHub.Forms
             {
                 if (form.ShowDialog() != DialogResult.OK) return;
 
-                Department result = form.Result
-                    ?? throw new ArgumentNullException(nameof(form.Result));
+                try
+                {
+                    Department result = form.Result
+                        ?? throw new ArgumentNullException(nameof(form.Result));
 
-                _bindingList.Add(result);
-                comboDepartment.SelectedItem = result;
+                    _bindingList.Add(result);
+                    comboDepartment.SelectedItem = result;
+                }
+                catch (Exception ex)
+                {
+                    MessageViewer.ShowError("An error occurred while trying to make new department.", ex.Message);
+                }
             }
         }
 
@@ -68,6 +79,9 @@ namespace LicenseHub.Forms
                 string lastName = txtLastName.Text.Trim();
                 string email = txtEmail.Text.Trim();
                 Department? department = comboDepartment.SelectedItem as Department;
+                Department? finalDepartment = (department is null || department.Id == -1)
+                    ? null
+                    : department;
 
                 if (string.IsNullOrEmpty(firstName))
                     throw new ArgumentNullException(nameof(firstName));
@@ -88,14 +102,16 @@ namespace LicenseHub.Forms
                         FirstName = firstName, 
                         LastName = lastName, 
                         Email = email, 
-                        Department = department 
+                        Department = finalDepartment,
+                        DepartmentId = finalDepartment?.Id
                     }
                     : new Owner { 
                         Id = _originalId, 
                         FirstName = firstName, 
                         LastName = lastName, 
                         Email = email, 
-                        Department = department 
+                        Department = finalDepartment,
+                        DepartmentId = finalDepartment?.Id
                     };
 
                 this.DialogResult = DialogResult.OK;

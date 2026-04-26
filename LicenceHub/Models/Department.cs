@@ -10,5 +10,10 @@ namespace LicenseHub.Models
         public int Id { get; set; }
         public required string Name { get; set; }
         public ICollection<Owner> Owners { get; } = [];
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
