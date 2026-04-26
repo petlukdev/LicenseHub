@@ -91,45 +91,41 @@ namespace LicenceHub
                 var selectedEntity = dataGridView.SelectedRows[0].DataBoundItem
                     ?? throw new ArgumentException("Selected row does not have a valid data bound item.");
 
-                switch (tabControl.SelectedTab?.Name)
+                bool wasModified = tabControl.SelectedTab?.Name switch
                 {
-                    case "licensePage":
-                        ModifyEntity(
-                            _dbContext.Licenses,
-                            () => new LicenseForm((License)selectedEntity),
-                            (License)selectedEntity
-                        );
-                        break;
+                    "licensePage" => ModifyEntity(
+                        _dbContext.Licenses,
+                        () => new LicenseForm((License)selectedEntity),
+                        (License)selectedEntity
+                    ),
 
-                    case "supplierPage":
-                        ModifyEntity(
-                            _dbContext.Suppliers,
-                            () => new SupplierForm((Supplier)selectedEntity),
-                            (Supplier)selectedEntity
-                        );
-                        break;
+                    "supplierPage" => ModifyEntity(
+                        _dbContext.Suppliers,
+                        () => new SupplierForm((Supplier)selectedEntity),
+                        (Supplier)selectedEntity
+                    ),
 
-                    case "ownerPage":
-                        ModifyEntity<OwnerForm, Owner>(
-                            _dbContext.Owners,
-                            () => new OwnerForm(
-                                (Owner)selectedEntity,
-                                _dbContext.Departments.Local.ToBindingList()
-                            ),
-                            (Owner)selectedEntity
-                        );
-                        break;
+                    "ownerPage" => ModifyEntity(
+                       _dbContext.Owners,
+                        () => new OwnerForm(
+                            (Owner)selectedEntity,
+                            _dbContext.Departments.Local.ToBindingList()
+                        ),
+                        (Owner)selectedEntity
+                    ),
 
-                    case "departmentPage":
-                        ModifyEntity(
-                            _dbContext.Departments,
-                            () => new DepartmentForm((Department)selectedEntity),
-                            (Department)selectedEntity
-                        );
-                        break;
+                    "departmentPage" => ModifyEntity(
+                        _dbContext.Departments,
+                        () => new DepartmentForm((Department)selectedEntity),
+                        (Department)selectedEntity
+                    ),
 
-                    default:
-                        throw new ArgumentException("Unknown tab selected");
+                    _ => throw new ArgumentException("Unknown tab selected")
+                };
+
+                if (wasModified)
+                {
+                    dataGridView.RefreshCurrentRow();
                 }
             }
             catch (Exception ex)
@@ -202,13 +198,13 @@ namespace LicenceHub
             }
         }
 
-        private void ModifyEntity<TForm, TEntity>(DbSet<TEntity> dbSet, Func<TForm> createForm, TEntity entity)
+        private bool ModifyEntity<TForm, TEntity>(DbSet<TEntity> dbSet, Func<TForm> createForm, TEntity entity)
             where TForm : Form, IEntityDialog<TEntity>
             where TEntity : class
         {
             using (var form = createForm())
             {
-                if (form.ShowDialog() != DialogResult.OK) return;
+                if (form.ShowDialog() != DialogResult.OK) return false;
 
                 TEntity result = form.Result
                     ?? throw new ArgumentNullException("Result is null!");
@@ -220,6 +216,7 @@ namespace LicenceHub
                         .SetValues(result);
 
                     _dbContext.SaveChanges();
+                    return true;
                 }
                 catch (Exception ex)
                 {
