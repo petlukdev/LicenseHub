@@ -15,18 +15,22 @@ namespace LicenseHub.Forms
     public partial class OwnerForm : Form, IEntityDialog<Owner>
     {
         private int _originalId = -1;
+        private readonly IBindingList _bindingList;
 
         public Owner? Result { get; private set; }
 
-        public OwnerForm()
+        public OwnerForm(IBindingList departments)
         {
             InitializeComponent();
             this.Text = "Add Owner";
 
-            // TODO: Load departments from database and populate comboDepartment
+            _bindingList = departments;
+            comboDepartment.DataSource = _bindingList;
+            comboDepartment.DisplayMember = "Name";
+            comboDepartment.ValueMember = "Id";
         }
 
-        public OwnerForm(Owner owner) : this()
+        public OwnerForm(Owner owner, IBindingList departments) : this(departments)
         {
             ArgumentNullException.ThrowIfNull(owner, nameof(owner));
 
@@ -35,11 +39,25 @@ namespace LicenseHub.Forms
             txtFirstName.Text = owner.FirstName;
             txtLastName.Text = owner.LastName;
             txtEmail.Text = owner.Email;
+
+            if (owner.Department is not null)
+            {
+                comboDepartment.SelectedItem = owner.Department;
+            }
         }
 
         private void AddDepartmentEvent(object sender, EventArgs e)
         {
-            // TODO: Implement department management form and logic
+            using (var form = new DepartmentForm())
+            {
+                if (form.ShowDialog() != DialogResult.OK) return;
+
+                Department result = form.Result
+                    ?? throw new ArgumentNullException(nameof(form.Result));
+
+                _bindingList.Add(result);
+                comboDepartment.SelectedItem = result;
+            }
         }
 
         private void ApplyEvent(object sender, EventArgs e)

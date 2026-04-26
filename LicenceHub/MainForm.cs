@@ -56,7 +56,7 @@ namespace LicenceHub
                     case "ownerPage":
                         AddEntity(
                             _dbContext.Owners,
-                            () => new OwnerForm()
+                            () => new OwnerForm(_dbContext.Departments.Local.ToBindingList())
                         );
                         break;
 
@@ -112,13 +112,16 @@ namespace LicenceHub
                     case "ownerPage":
                         ModifyEntity<OwnerForm, Owner>(
                             _dbContext.Owners,
-                            () => new OwnerForm((Owner)selectedEntity),
+                            () => new OwnerForm(
+                                (Owner)selectedEntity,
+                                _dbContext.Departments.Local.ToBindingList()
+                            ),
                             (Owner)selectedEntity
                         );
                         break;
 
                     case "departmentPage":
-                        ModifyEntity<DepartmentForm, Department>(
+                        ModifyEntity(
                             _dbContext.Departments,
                             () => new DepartmentForm((Department)selectedEntity),
                             (Department)selectedEntity
