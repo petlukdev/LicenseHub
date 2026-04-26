@@ -40,19 +40,31 @@ namespace LicenceHub
                 switch (tabControl.SelectedTab?.Name)
                 {
                     case "licensePage":
-                        AddEntity<LicenseForm, License>(_dbContext.Licenses);
+                        AddEntity(
+                            _dbContext.Licenses,
+                            () => new LicenseForm()
+                        );
                         break;
 
                     case "supplierPage":
-                        AddEntity<SupplierForm, Supplier>(_dbContext.Suppliers);
+                        AddEntity(
+                            _dbContext.Suppliers,
+                            () => new SupplierForm()
+                        );
                         break;
 
                     case "ownerPage":
-                        AddEntity<OwnerForm, Owner>(_dbContext.Owners);
+                        AddEntity(
+                            _dbContext.Owners,
+                            () => new OwnerForm()
+                        );
                         break;
 
                     case "departmentPage":
-                        AddEntity<DepartmentForm, Department>(_dbContext.Departments);
+                        AddEntity(
+                            _dbContext.Departments,
+                            () => new DepartmentForm()
+                        );
                         break;
 
                     default:
@@ -82,19 +94,35 @@ namespace LicenceHub
                 switch (tabControl.SelectedTab?.Name)
                 {
                     case "licensePage":
-                        ModifyEntity<LicenseForm, License>(_dbContext.Licenses, (License)selectedEntity);
+                        ModifyEntity(
+                            _dbContext.Licenses,
+                            () => new LicenseForm((License)selectedEntity),
+                            (License)selectedEntity
+                        );
                         break;
 
                     case "supplierPage":
-                        ModifyEntity<SupplierForm, Supplier>(_dbContext.Suppliers, (Supplier)selectedEntity);
+                        ModifyEntity(
+                            _dbContext.Suppliers,
+                            () => new SupplierForm((Supplier)selectedEntity),
+                            (Supplier)selectedEntity
+                        );
                         break;
 
                     case "ownerPage":
-                        ModifyEntity<OwnerForm, Owner>(_dbContext.Owners, (Owner)selectedEntity);
+                        ModifyEntity<OwnerForm, Owner>(
+                            _dbContext.Owners,
+                            () => new OwnerForm((Owner)selectedEntity),
+                            (Owner)selectedEntity
+                        );
                         break;
 
                     case "departmentPage":
-                        ModifyEntity<DepartmentForm, Department>(_dbContext.Departments, (Department)selectedEntity);
+                        ModifyEntity<DepartmentForm, Department>(
+                            _dbContext.Departments,
+                            () => new DepartmentForm((Department)selectedEntity),
+                            (Department)selectedEntity
+                        );
                         break;
 
                     default:
@@ -146,18 +174,15 @@ namespace LicenceHub
             }
         }
 
-        private void AddEntity<TForm, TEntity>(DbSet<TEntity> dbSet)
-            where TForm : Form, new()
+        private void AddEntity<TForm, TEntity>(DbSet<TEntity> dbSet, Func<TForm> createForm)
+            where TForm : Form, IEntityDialog<TEntity>
             where TEntity : class
         {
-            using (var form = new TForm())
+            using (var form = createForm())
             {
                 if (form.ShowDialog() != DialogResult.OK) return;
 
-                var resultProperty = typeof(TForm).GetProperty("Result")
-                    ?? throw new ArgumentException("The form does not have a Result property.");
-
-                var result = resultProperty.GetValue(form) as TEntity
+                TEntity result = form.Result
                     ?? throw new ArgumentNullException("Result is null!");
 
                 dbSet.Add(result);
@@ -174,23 +199,17 @@ namespace LicenceHub
             }
         }
 
-        private void ModifyEntity<TForm, TEntity>(DbSet<TEntity> dbSet, TEntity entity)
-            where TForm : Form, new()
+        private void ModifyEntity<TForm, TEntity>(DbSet<TEntity> dbSet, Func<TForm> createForm, TEntity entity)
+            where TForm : Form, IEntityDialog<TEntity>
             where TEntity : class
         {
-            ConstructorInfo constructor = typeof(TForm).GetConstructor([typeof(TEntity)])
-                ?? throw new ArgumentException("The form does not have a constructor that accepts the entity.");
-
-            using (var form = (TForm)constructor.Invoke(new object[] { entity }))
+            using (var form = createForm())
             {
                 if (form.ShowDialog() != DialogResult.OK) return;
 
-                var resultProperty = typeof(TForm).GetProperty("Result")
-                    ?? throw new ArgumentException("The form does not have a Result property.");
-
-                var result = resultProperty.GetValue(form) as TEntity
+                TEntity result = form.Result
                     ?? throw new ArgumentNullException("Result is null!");
-                
+
                 try
                 {
                     _dbContext

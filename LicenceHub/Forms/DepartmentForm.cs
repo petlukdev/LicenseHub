@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace LicenseHub.Forms
 {
-    public partial class DepartmentForm : Form
+    public partial class DepartmentForm : Form, IEntityDialog<Department>
     {
         private int _originalId = -1;
 

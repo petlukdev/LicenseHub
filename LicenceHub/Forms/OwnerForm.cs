@@ -12,7 +12,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LicenseHub.Forms
 {
-    public partial class OwnerForm : Form
+    public partial class OwnerForm : Form, IEntityDialog<Owner>
     {
         private int _originalId = -1;
 

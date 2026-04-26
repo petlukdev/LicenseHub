@@ -8,8 +8,10 @@ using System.Windows.Forms;
 
 namespace LicenseHub.Forms
 {
-    public partial class LicenseForm : Form
+    public partial class LicenseForm : Form, IEntityDialog<License>
     {
+        public License? Result { get; private set; }
+
         public LicenseForm()
         {
             InitializeComponent();
@@ -27,7 +29,5 @@ namespace LicenseHub.Forms
             comboOwner.SelectedItem = license.Owner;
             comboSupplier.SelectedItem = license.Supplier;
         }
-
-        public License? Result { get; private set; }
     }
 }

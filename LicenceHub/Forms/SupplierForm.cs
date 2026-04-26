@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace LicenseHub.Forms
 {
-    public partial class SupplierForm : Form
+    public partial class SupplierForm : Form, IEntityDialog<Supplier>
     {
         private int _originalId = -1;
 
