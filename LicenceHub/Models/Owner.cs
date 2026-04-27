@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace LicenseHub.Models
@@ -14,9 +16,12 @@ namespace LicenseHub.Models
         public Department? Department { get; set; }
         public ICollection<License> Licenses { get; } = [];
 
+        [NotMapped]
+        public string FullName => $"{FirstName} {LastName}";
+
         public override string ToString()
         {
-            return $"{FirstName} {LastName}";
+            return FullName;
         }
     }
 }

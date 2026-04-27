@@ -177,6 +177,7 @@
             // comboType
             // 
             comboType.Anchor = AnchorStyles.Right;
+            comboType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboType.FormattingEnabled = true;
             comboType.Location = new Point(133, 75);
             comboType.Margin = new Padding(3, 2, 3, 2);
@@ -237,6 +238,7 @@
             btnAddOwner.TabIndex = 15;
             btnAddOwner.Text = "+";
             btnAddOwner.UseVisualStyleBackColor = true;
+            btnAddOwner.Click += AddOwnerEvent;
             // 
             // btnAddSupplier
             // 
@@ -248,6 +250,7 @@
             btnAddSupplier.TabIndex = 16;
             btnAddSupplier.Text = "+";
             btnAddSupplier.UseVisualStyleBackColor = true;
+            btnAddSupplier.Click += AddSupplierEvent;
             // 
             // txtKey
             // 
@@ -267,6 +270,7 @@
             btnApply.TabIndex = 1;
             btnApply.Text = "Apply";
             btnApply.UseVisualStyleBackColor = true;
+            btnApply.Click += ApplyEvent;
             // 
             // btnCancel
             // 
@@ -277,6 +281,7 @@
             btnCancel.TabIndex = 2;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += CancelEvent;
             // 
             // LicenseForm
             // 

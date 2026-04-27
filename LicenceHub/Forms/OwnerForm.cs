@@ -102,16 +102,14 @@ namespace LicenseHub.Forms
                         FirstName = firstName, 
                         LastName = lastName, 
                         Email = email, 
-                        Department = finalDepartment,
-                        DepartmentId = finalDepartment?.Id
+                        Department = finalDepartment
                     }
                     : new Owner { 
                         Id = _originalId, 
                         FirstName = firstName, 
                         LastName = lastName, 
                         Email = email, 
-                        Department = finalDepartment,
-                        DepartmentId = finalDepartment?.Id
+                        Department = finalDepartment
                     };
 
                 this.DialogResult = DialogResult.OK;

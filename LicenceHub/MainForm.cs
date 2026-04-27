@@ -42,7 +42,11 @@ namespace LicenceHub
                     case "licensePage":
                         AddEntity(
                             _dbContext.Licenses,
-                            () => new LicenseForm()
+                            () => new LicenseForm(
+                                _dbContext.Owners.Local.ToBindingList(),
+                                _dbContext.Suppliers.Local.ToBindingList(),
+                                _dbContext.Departments.Local.ToBindingList()
+                            )
                         );
                         break;
 
@@ -95,7 +99,12 @@ namespace LicenceHub
                 {
                     "licensePage" => ModifyEntity(
                         _dbContext.Licenses,
-                        () => new LicenseForm((License)selectedEntity),
+                       () => new LicenseForm(
+                           (License)selectedEntity,
+                           _dbContext.Owners.Local.ToBindingList(),
+                           _dbContext.Suppliers.Local.ToBindingList(),
+                           _dbContext.Departments.Local.ToBindingList()
+                       ),
                         (License)selectedEntity
                     ),
 
@@ -211,9 +220,19 @@ namespace LicenceHub
 
                 try
                 {
-                    _dbContext
-                        .Entry(entity).CurrentValues
-                        .SetValues(result);
+                    var entry = _dbContext.Entry(entity);
+                    
+                    entry.CurrentValues.SetValues(result);
+
+                    foreach (var navigation in entry.Navigations)
+                    {
+                        var propertyInfo = typeof(TEntity).GetProperty(navigation.Metadata.Name);
+                        if (propertyInfo != null)
+                        {
+                            var newValue = propertyInfo.GetValue(result);
+                            propertyInfo.SetValue(entity, newValue);
+                        }
+                    }
 
                     _dbContext.SaveChanges();
                     return true;
