@@ -107,6 +107,8 @@
             label2 = new Label();
             lblTotalLicenses = new Label();
             lblExpire30Days = new Label();
+            label3 = new Label();
+            lblExpired = new Label();
             panel1 = new Panel();
             toolStrip1.SuspendLayout();
             tabControl.SuspendLayout();
@@ -886,14 +888,17 @@
             tableLayoutPanel1.Controls.Add(label2, 0, 1);
             tableLayoutPanel1.Controls.Add(lblTotalLicenses, 1, 0);
             tableLayoutPanel1.Controls.Add(lblExpire30Days, 1, 1);
+            tableLayoutPanel1.Controls.Add(label3, 0, 2);
+            tableLayoutPanel1.Controls.Add(lblExpired, 1, 2);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(2, 3);
             tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Size = new Size(183, 43);
+            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.Size = new Size(183, 61);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
@@ -902,7 +907,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
-            label1.Size = new Size(100, 21);
+            label1.Size = new Size(100, 20);
             label1.TabIndex = 0;
             label1.Text = "Total licenses:";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -911,9 +916,9 @@
             // 
             label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             label2.AutoSize = true;
-            label2.Location = new Point(3, 21);
+            label2.Location = new Point(3, 20);
             label2.Name = "label2";
-            label2.Size = new Size(129, 22);
+            label2.Size = new Size(129, 20);
             label2.TabIndex = 1;
             label2.Text = "Expires in 30 days:";
             label2.TextAlign = ContentAlignment.MiddleCenter;
@@ -924,7 +929,7 @@
             lblTotalLicenses.AutoSize = true;
             lblTotalLicenses.Location = new Point(163, 0);
             lblTotalLicenses.Name = "lblTotalLicenses";
-            lblTotalLicenses.Size = new Size(17, 21);
+            lblTotalLicenses.Size = new Size(17, 20);
             lblTotalLicenses.TabIndex = 2;
             lblTotalLicenses.Text = "0";
             lblTotalLicenses.TextAlign = ContentAlignment.MiddleCenter;
@@ -933,12 +938,34 @@
             // 
             lblExpire30Days.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             lblExpire30Days.AutoSize = true;
-            lblExpire30Days.Location = new Point(163, 21);
+            lblExpire30Days.Location = new Point(163, 20);
             lblExpire30Days.Name = "lblExpire30Days";
-            lblExpire30Days.Size = new Size(17, 22);
+            lblExpire30Days.Size = new Size(17, 20);
             lblExpire30Days.TabIndex = 3;
             lblExpire30Days.Text = "0";
             lblExpire30Days.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Left;
+            label3.AutoSize = true;
+            label3.Location = new Point(3, 40);
+            label3.Name = "label3";
+            label3.Size = new Size(62, 20);
+            label3.TabIndex = 4;
+            label3.Text = "Expired:";
+            label3.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // lblExpired
+            // 
+            lblExpired.Anchor = AnchorStyles.Right;
+            lblExpired.AutoSize = true;
+            lblExpired.Location = new Point(163, 40);
+            lblExpired.Name = "lblExpired";
+            lblExpired.Size = new Size(17, 20);
+            lblExpired.TabIndex = 5;
+            lblExpired.Text = "0";
+            lblExpired.TextAlign = ContentAlignment.MiddleRight;
             // 
             // panel1
             // 
@@ -948,14 +975,14 @@
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
             panel1.Padding = new Padding(2, 3, 2, 3);
-            panel1.Size = new Size(189, 51);
+            panel1.Size = new Size(189, 69);
             panel1.TabIndex = 3;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(914, 614);
             Controls.Add(tabControl);
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
@@ -1077,5 +1104,7 @@
         private DataGridViewTextBoxColumn supplierIdDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn supplierDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn expirationStatusDataGridViewTextBoxColumn;
+        private Label label3;
+        private Label lblExpired;
     }
 }

@@ -25,6 +25,7 @@ namespace LicenceHub
 
             PopulateDataGrids();
             PopulateCombos();
+            RefreshStats();
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
@@ -74,6 +75,7 @@ namespace LicenceHub
                     default:
                         throw new ArgumentException("Unknown tab selected");
                 }
+                RefreshStats();
             }
             catch (Exception ex)
             {
@@ -135,6 +137,7 @@ namespace LicenceHub
                 if (wasModified)
                 {
                     dataGridView.RefreshCurrentRow();
+                    RefreshStats();
                 }
             }
             catch (Exception ex)
@@ -175,6 +178,7 @@ namespace LicenceHub
                 }
 
                 _dbContext.SaveChanges();
+                RefreshStats();
             }
             catch (Exception ex)
             {
@@ -300,6 +304,23 @@ namespace LicenceHub
 
             comboTypeLicense.DataSource = types;
             comboExpiration.DataSource = statuses;
+        }
+
+        private void RefreshStats()
+        {
+            int totalLicenses = _dbContext.Licenses.Local.Count();
+
+            int expiringLicenses = _dbContext.Licenses.Local.Count(l =>
+                l.ExpirationStatus == ExpirationStatus.ExpiringSoon
+            );
+
+            int expiredLicenses = _dbContext.Licenses.Local.Count(l =>
+                l.ExpirationStatus == ExpirationStatus.Expired
+            );
+
+            lblTotalLicenses.Text = totalLicenses.ToString();
+            lblExpire30Days.Text = expiringLicenses.ToString();
+            lblExpired.Text = expiredLicenses.ToString();
         }
     }
 }
