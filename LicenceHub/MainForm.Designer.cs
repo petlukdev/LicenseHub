@@ -164,7 +164,7 @@
             btnModifyEntry.Name = "btnModifyEntry";
             btnModifyEntry.Size = new Size(80, 48);
             btnModifyEntry.Text = "Modify";
-            btnModifyEntry.ToolTipText = "Modify selected entry";
+            btnModifyEntry.ToolTipText = "Modify selected row";
             btnModifyEntry.Click += ModifyEntryEvent;
             // 
             // btnDeleteEntry
@@ -174,7 +174,7 @@
             btnDeleteEntry.Name = "btnDeleteEntry";
             btnDeleteEntry.Size = new Size(77, 48);
             btnDeleteEntry.Text = "Delete";
-            btnDeleteEntry.ToolTipText = "Delete selected entry";
+            btnDeleteEntry.ToolTipText = "Delete selected row";
             btnDeleteEntry.Click += DeleteEntryEvent;
             // 
             // tabControl
