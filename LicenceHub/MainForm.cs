@@ -3,7 +3,9 @@ using LicenseHub.Extensions;
 using LicenseHub.Forms;
 using LicenseHub.Models;
 using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
 using System.Reflection;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace LicenceHub
 {
@@ -186,6 +188,63 @@ namespace LicenceHub
             }
         }
 
+        private void ApplyFilterEvent(object sender, EventArgs e)
+        {
+            try
+            {
+                Action applyAction = tabControl.SelectedTab?.Name switch
+                {
+                    "licensePage" => ApplyLicenseFilters,
+                    "supplierPage" => ApplySupplierFilters,
+                    "ownerPage" => ApplyOwnerFilters,
+                    "departmentPage" => ApplyDepartmentFilters,
+                    _ => throw new ArgumentException("Unknown tab selected")
+                };
+
+                applyAction();
+            }
+            catch (Exception ex)
+            {
+                MessageViewer.ShowError("An error occurred while trying to filter an entries.", ex.Message);
+            }
+        }
+
+        private void ClearFilterEvent(object sender, EventArgs e)
+        {
+            try
+            {
+                TabPage? tab = tabControl.SelectedTab;
+                DataGridView dataGridView = tab?.Controls.OfType<DataGridView>().FirstOrDefault()
+                    ?? throw new ArgumentException("No DataGridView found in the selected tab");
+
+                switch (tab.Name)
+                {
+                    case "licensePage":
+                        dataGridView.DataSource = _dbContext.Licenses.Local.ToBindingList();
+                        btnClearLicense.Enabled = false;
+                        break;
+                    case "supplierPage":
+                        dataGridView.DataSource = _dbContext.Suppliers.Local.ToBindingList();
+                        btnClearSupplier.Enabled = false;
+                        break;
+                    case "ownerPage":
+                        dataGridView.DataSource = _dbContext.Owners.Local.ToBindingList();
+                        btnClearOwner.Enabled = false;
+                        break;
+                    case "departmentPage":
+                        dataGridView.DataSource = _dbContext.Departments.Local.ToBindingList();
+                        btnClearOwner.Enabled = false;
+                        break;
+                    default:
+                        throw new ArgumentException("Unknown tab selected");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageViewer.ShowError("An error occurred while trying to clear a filters.", ex.Message);
+            }
+        }
+
         private void AddEntity<TForm, TEntity>(DbSet<TEntity> dbSet, Func<TForm> createForm)
             where TForm : Form, IEntityDialog<TEntity>
             where TEntity : class
@@ -225,7 +284,7 @@ namespace LicenceHub
                 try
                 {
                     var entry = _dbContext.Entry(entity);
-                    
+
                     entry.CurrentValues.SetValues(result);
 
                     foreach (var navigation in entry.Navigations)
@@ -249,6 +308,90 @@ namespace LicenceHub
                     throw ex.InnerException ?? ex;
                 }
             }
+        }
+
+        private void ApplyLicenseFilters()
+        {
+            IEnumerable<License> query = DataGridViewExtensions.ApplyTextFilter(
+                _dbContext.Licenses.Local,
+                l => l.Title,
+                searchLicense.Text.Trim()
+            );
+
+            int? ownerId = comboOwner.SelectedValue as int?;
+            int? supplierId = comboSupplier.SelectedValue as int?;
+
+            if (Enum.TryParse<LicenseType>(comboTypeLicense.Text, out var type))
+            {
+                query = query.Where(l => l.Type == type);
+            }
+
+            if (Enum.TryParse<ExpirationStatus>(comboExpiration.Text, out var status))
+            {
+                query = query.Where(l => l.ExpirationStatus == status);
+            }
+
+            if (ownerId.HasValue && ownerId > 0)
+            {
+                query = query.Where(l => l.OwnerId == ownerId);
+            }
+
+
+            if (supplierId.HasValue && supplierId > 0)
+            {
+                query = query.Where(l => l.SupplierId == supplierId);
+            }
+
+            DataGridViewExtensions.ApplyFilters(dataGridLicense, query);
+            btnClearLicense.Enabled = true;
+        }
+
+        private void ApplyOwnerFilters()
+        {
+            IEnumerable<Owner> query = _dbContext.Owners.Local.AsEnumerable();
+
+            string txt = searchOwner.Text.Trim();
+            int? departmentId = comboDepartment.SelectedValue as int?;
+
+            if (!string.IsNullOrWhiteSpace(txt))
+            {
+                query = query.Where(s => 
+                    s.FirstName.ToLower().Contains(txt, StringComparison.OrdinalIgnoreCase) || 
+                    s.LastName.ToLower().Contains(txt, StringComparison.OrdinalIgnoreCase)
+                );
+            }
+
+            if (departmentId.HasValue && departmentId > 0)
+            {
+                query = query.Where(s => s.Department is not null && s.Department.Id == departmentId);
+            }
+
+            DataGridViewExtensions.ApplyFilters(dataGridOwner, query);
+            btnClearOwner.Enabled = true;
+        }
+
+        private void ApplySupplierFilters()
+        {
+            IEnumerable<Supplier> query = DataGridViewExtensions.ApplyTextFilter(
+                _dbContext.Suppliers.Local,
+                s => s.Name,
+                searchSupplier.Text.Trim()
+            );
+
+            DataGridViewExtensions.ApplyFilters(dataGridSupplier, query);
+            btnClearSupplier.Enabled = true;
+        }
+
+        private void ApplyDepartmentFilters()
+        {
+            IEnumerable<Department> query = DataGridViewExtensions.ApplyTextFilter(
+                _dbContext.Departments.Local,
+                d => d.Name,
+                searchDepartment.Text.Trim()
+            );
+
+            DataGridViewExtensions.ApplyFilters(dataGridDepartment, query);
+            btnClearDepartment.Enabled = true;
         }
 
         private void PopulateDataGrids()
@@ -280,7 +423,7 @@ namespace LicenceHub
         {
             comboOwner.Setup(
                 _dbContext.Owners.Local,
-                o => new FilterItem { Id = o.Id, Text = o.ToString()},
+                o => new FilterItem { Id = o.Id, Text = o.ToString() },
                 "All Owners"
             );
 

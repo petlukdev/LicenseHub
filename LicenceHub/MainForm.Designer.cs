@@ -301,10 +301,12 @@
             btnApplyLicense.TabIndex = 2;
             btnApplyLicense.Text = "Apply";
             btnApplyLicense.UseVisualStyleBackColor = true;
+            btnApplyLicense.Click += ApplyFilterEvent;
             // 
             // btnClearLicense
             // 
             btnClearLicense.Anchor = AnchorStyles.Left;
+            btnClearLicense.Enabled = false;
             btnClearLicense.Location = new Point(95, 40);
             btnClearLicense.Margin = new Padding(3, 4, 3, 4);
             btnClearLicense.Name = "btnClearLicense";
@@ -312,6 +314,7 @@
             btnClearLicense.TabIndex = 3;
             btnClearLicense.Text = "Clear";
             btnClearLicense.UseVisualStyleBackColor = true;
+            btnClearLicense.Click += ClearFilterEvent;
             // 
             // dataGridLicense
             // 
@@ -516,10 +519,12 @@
             btnApplyOwner.TabIndex = 2;
             btnApplyOwner.Text = "Apply";
             btnApplyOwner.UseVisualStyleBackColor = true;
+            btnApplyOwner.Click += ApplyFilterEvent;
             // 
             // btnClearOwner
             // 
             btnClearOwner.Anchor = AnchorStyles.Left;
+            btnClearOwner.Enabled = false;
             btnClearOwner.Location = new Point(511, 4);
             btnClearOwner.Margin = new Padding(3, 4, 3, 4);
             btnClearOwner.Name = "btnClearOwner";
@@ -527,6 +532,7 @@
             btnClearOwner.TabIndex = 3;
             btnClearOwner.Text = "Clear";
             btnClearOwner.UseVisualStyleBackColor = true;
+            btnClearOwner.Click += ClearFilterEvent;
             // 
             // dataGridOwner
             // 
@@ -676,10 +682,12 @@
             btnApplySupplier.TabIndex = 2;
             btnApplySupplier.Text = "Apply";
             btnApplySupplier.UseVisualStyleBackColor = true;
+            btnApplySupplier.Click += ApplyFilterEvent;
             // 
             // btnClearSupplier
             // 
             btnClearSupplier.Anchor = AnchorStyles.Left;
+            btnClearSupplier.Enabled = false;
             btnClearSupplier.Location = new Point(334, 4);
             btnClearSupplier.Margin = new Padding(3, 4, 3, 4);
             btnClearSupplier.Name = "btnClearSupplier";
@@ -687,6 +695,7 @@
             btnClearSupplier.TabIndex = 3;
             btnClearSupplier.Text = "Clear";
             btnClearSupplier.UseVisualStyleBackColor = true;
+            btnClearSupplier.Click += ClearFilterEvent;
             // 
             // dataGridSupplier
             // 
@@ -819,10 +828,12 @@
             btnApplyDepartment.TabIndex = 2;
             btnApplyDepartment.Text = "Apply";
             btnApplyDepartment.UseVisualStyleBackColor = true;
+            btnApplyDepartment.Click += ApplyFilterEvent;
             // 
             // btnClearDepartment
             // 
             btnClearDepartment.Anchor = AnchorStyles.Left;
+            btnClearDepartment.Enabled = false;
             btnClearDepartment.Location = new Point(334, 4);
             btnClearDepartment.Margin = new Padding(3, 4, 3, 4);
             btnClearDepartment.Name = "btnClearDepartment";
@@ -830,6 +841,7 @@
             btnClearDepartment.TabIndex = 3;
             btnClearDepartment.Text = "Clear";
             btnClearDepartment.UseVisualStyleBackColor = true;
+            btnClearDepartment.Click += ClearFilterEvent;
             // 
             // dataGridDepartment
             // 
