@@ -3,9 +3,7 @@ using LicenseHub.Extensions;
 using LicenseHub.Forms;
 using LicenseHub.Models;
 using Microsoft.EntityFrameworkCore;
-using SQLitePCL;
-using System.Reflection;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using License = LicenseHub.Models.License;
 
 namespace LicenceHub
 {
@@ -355,8 +353,8 @@ namespace LicenceHub
 
             if (!string.IsNullOrWhiteSpace(txt))
             {
-                query = query.Where(s => 
-                    s.FirstName.ToLower().Contains(txt, StringComparison.OrdinalIgnoreCase) || 
+                query = query.Where(s =>
+                    s.FirstName.ToLower().Contains(txt, StringComparison.OrdinalIgnoreCase) ||
                     s.LastName.ToLower().Contains(txt, StringComparison.OrdinalIgnoreCase)
                 );
             }
@@ -464,6 +462,32 @@ namespace LicenceHub
             lblTotalLicenses.Text = totalLicenses.ToString();
             lblExpire30Days.Text = expiringLicenses.ToString();
             lblExpired.Text = expiredLicenses.ToString();
+        }
+
+        private void LicenseCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dataGridLicense.Rows[e.RowIndex].DataBoundItem is License licence)
+            {
+                Color colorBg = Color.White;
+                Color colorFont = Color.Black;
+
+                switch (licence.ExpirationStatus)
+                {
+                    case ExpirationStatus.Expired:
+                        colorBg = Color.LightCoral;
+                        break;
+
+                    case ExpirationStatus.ExpiringSoon:
+                        colorBg = Color.LightGoldenrodYellow;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                dataGridLicense.Rows[e.RowIndex].DefaultCellStyle.BackColor = colorBg;
+                dataGridLicense.Rows[e.RowIndex].DefaultCellStyle.ForeColor = colorFont;
+            }
         }
     }
 }

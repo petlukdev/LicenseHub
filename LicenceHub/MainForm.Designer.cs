@@ -333,6 +333,7 @@
             dataGridLicense.RowHeadersWidth = 51;
             dataGridLicense.Size = new Size(867, 305);
             dataGridLicense.TabIndex = 0;
+            dataGridLicense.CellFormatting += LicenseCellFormatting;
             // 
             // idDataGridViewTextBoxColumn
             // 
