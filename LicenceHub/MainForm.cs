@@ -1,6 +1,8 @@
 using LicenseHub.DB;
 using LicenseHub.Extensions;
+using LicenseHub.Factories;
 using LicenseHub.Forms;
+using LicenseHub.Helpers;
 using LicenseHub.Models;
 using Microsoft.EntityFrameworkCore;
 using License = LicenseHub.Models.License;
@@ -11,12 +13,18 @@ namespace LicenceHub
     {
         private readonly AppDbContext _dbContext;
 
+        private FilterService _filterService;
+        private FormFactory _formFactory;
+
         public MainForm()
         {
             InitializeComponent();
 
-            _dbContext = new AppDbContext();
+            _dbContext = new();
             _dbContext.Database.Migrate();
+
+            _filterService = new(_dbContext);
+            _formFactory = new(_dbContext);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -34,157 +42,115 @@ namespace LicenceHub
             _dbContext.Dispose();
         }
 
-        private void AddEntryEvent(object sender, EventArgs e)
+        private void AddEntryEvent(object sender, EventArgs e) => ExecuteSafe(() =>
         {
-            try
+            switch (tabControl.SelectedTab?.Name)
             {
-                switch (tabControl.SelectedTab?.Name)
-                {
-                    case "licensePage":
-                        AddEntity(
-                            _dbContext.Licenses,
-                            () => new LicenseForm(
-                                _dbContext.Owners.Local.ToBindingList(),
-                                _dbContext.Suppliers.Local.ToBindingList(),
-                                _dbContext.Departments.Local.ToBindingList()
-                            )
-                        );
-                        break;
-
-                    case "supplierPage":
-                        AddEntity(
-                            _dbContext.Suppliers,
-                            () => new SupplierForm()
-                        );
-                        break;
-
-                    case "ownerPage":
-                        AddEntity(
-                            _dbContext.Owners,
-                            () => new OwnerForm(_dbContext.Departments.Local.ToBindingList())
-                        );
-                        break;
-
-                    case "departmentPage":
-                        AddEntity(
-                            _dbContext.Departments,
-                            () => new DepartmentForm()
-                        );
-                        break;
-
-                    default:
-                        throw new ArgumentException("Unknown tab selected");
-                }
-                RefreshStats();
-            }
-            catch (Exception ex)
-            {
-                MessageViewer.ShowError("An error occurred while trying to add a new entry.", ex.Message);
-            }
-        }
-
-        private void ModifyEntryEvent(object sender, EventArgs e)
-        {
-            try
-            {
-                DataGridView dataGridView = tabControl.SelectedTab?.Controls.OfType<DataGridView>().FirstOrDefault()
-                    ?? throw new ArgumentException("No DataGridView found in the selected tab");
-
-                if (dataGridView.SelectedRows.Count == 0) return;
-                if (dataGridView.SelectedRows.Count > 1)
-                    throw new ArgumentException("Multiple rows selected. Please select only one row to modify.");
-
-                var selectedEntity = dataGridView.SelectedRows[0].DataBoundItem
-                    ?? throw new ArgumentException("Selected row does not have a valid data bound item.");
-
-                bool wasModified = tabControl.SelectedTab?.Name switch
-                {
-                    "licensePage" => ModifyEntity(
+                case "licensePage":
+                    AddEntity(
                         _dbContext.Licenses,
-                       () => new LicenseForm(
-                           (License)selectedEntity,
-                           _dbContext.Owners.Local.ToBindingList(),
-                           _dbContext.Suppliers.Local.ToBindingList(),
-                           _dbContext.Departments.Local.ToBindingList()
-                       ),
-                        (License)selectedEntity
-                    ),
-
-                    "supplierPage" => ModifyEntity(
-                        _dbContext.Suppliers,
-                        () => new SupplierForm((Supplier)selectedEntity),
-                        (Supplier)selectedEntity
-                    ),
-
-                    "ownerPage" => ModifyEntity(
-                       _dbContext.Owners,
-                        () => new OwnerForm(
-                            (Owner)selectedEntity,
+                        () => new LicenseForm(
+                            _dbContext.Owners.Local.ToBindingList(),
+                            _dbContext.Suppliers.Local.ToBindingList(),
                             _dbContext.Departments.Local.ToBindingList()
-                        ),
-                        (Owner)selectedEntity
-                    ),
+                        )
+                    );
+                    break;
 
-                    "departmentPage" => ModifyEntity(
+                case "supplierPage":
+                    AddEntity(
+                        _dbContext.Suppliers,
+                        () => new SupplierForm()
+                    );
+                    break;
+
+                case "ownerPage":
+                    AddEntity(
+                        _dbContext.Owners,
+                        () => new OwnerForm(_dbContext.Departments.Local.ToBindingList())
+                    );
+                    break;
+
+                case "departmentPage":
+                    AddEntity(
                         _dbContext.Departments,
-                        () => new DepartmentForm((Department)selectedEntity),
-                        (Department)selectedEntity
-                    ),
+                        () => new DepartmentForm()
+                    );
+                    break;
 
-                    _ => throw new ArgumentException("Unknown tab selected")
-                };
-
-                if (wasModified)
-                {
-                    dataGridView.RefreshCurrentRow();
-                    RefreshStats();
-                }
+                default:
+                    throw new ArgumentException("Unknown tab selected");
             }
-            catch (Exception ex)
-            {
-                MessageViewer.ShowError("An error occurred while trying to modify an entry.", ex.Message);
-            }
-        }
+            RefreshStats();
+        }, "An error occurred while trying to add a new entry.");
 
-        private void DeleteEntryEvent(object sender, EventArgs e)
+        private void ModifyEntryEvent(object sender, EventArgs e) => ExecuteSafe(() =>
         {
-            try
+            DataGridView view = GetCurrentDataGridView();
+
+            if (view.SelectedRows.Count == 0) return;
+            if (view.SelectedRows.Count > 1)
+                throw new ArgumentException("Multiple rows selected. Please select only one row to modify.");
+
+            var selectedEntity = view.SelectedRows[0].DataBoundItem
+                ?? throw new ArgumentException("Selected row does not have a valid data bound item.");
+
+            bool wasModified = tabControl.SelectedTab?.Name switch
             {
-                DataGridView dataGridView = tabControl.SelectedTab?.Controls.OfType<DataGridView>().FirstOrDefault()
-                    ?? throw new ArgumentException("No DataGridView found in the selected tab");
+                "licensePage" => ModifyEntity(
+                    _dbContext.Licenses,
+                   () => new LicenseForm(
+                       (License)selectedEntity,
+                       _dbContext.Owners.Local.ToBindingList(),
+                       _dbContext.Suppliers.Local.ToBindingList(),
+                       _dbContext.Departments.Local.ToBindingList()
+                   ),
+                    (License)selectedEntity
+                ),
 
-                if (dataGridView.SelectedRows.Count == 0) return;
+                "supplierPage" => ModifyEntity(
+                    _dbContext.Suppliers,
+                    () => new SupplierForm((Supplier)selectedEntity),
+                    (Supplier)selectedEntity
+                ),
 
-                foreach (DataGridViewRow row in dataGridView.SelectedRows)
-                {
-                    if (row.DataBoundItem == null) continue;
-                    switch (tabControl.SelectedTab?.Name)
-                    {
-                        case "licensePage":
-                            _dbContext.Licenses.Remove((License)row.DataBoundItem);
-                            break;
-                        case "supplierPage":
-                            _dbContext.Suppliers.Remove((Supplier)row.DataBoundItem);
-                            break;
-                        case "ownerPage":
-                            _dbContext.Owners.Remove((Owner)row.DataBoundItem);
-                            break;
-                        case "departmentPage":
-                            _dbContext.Departments.Remove((Department)row.DataBoundItem);
-                            break;
-                        default:
-                            throw new ArgumentException("Unknown tab selected");
-                    }
-                }
+                "ownerPage" => ModifyEntity(
+                   _dbContext.Owners,
+                    () => new OwnerForm(
+                        (Owner)selectedEntity,
+                        _dbContext.Departments.Local.ToBindingList()
+                    ),
+                    (Owner)selectedEntity
+                ),
 
-                _dbContext.SaveChanges();
+                "departmentPage" => ModifyEntity(
+                    _dbContext.Departments,
+                    () => new DepartmentForm((Department)selectedEntity),
+                    (Department)selectedEntity
+                ),
+
+                _ => throw new ArgumentException("Unknown tab selected")
+            };
+
+            if (wasModified)
+            {
+                view.RefreshCurrentRow();
                 RefreshStats();
             }
-            catch (Exception ex)
+        }, "An error occurred while trying to modify an entry.");
+
+        private void DeleteEntryEvent(object sender, EventArgs e) => ExecuteSafe(() =>
+        {
+            DataGridView view = GetCurrentDataGridView();
+
+            foreach (DataGridViewRow row in view.SelectedRows)
             {
-                MessageViewer.ShowError("An error occurred while trying to delete an entry.", ex.Message);
+                if (row.DataBoundItem is object entity) _dbContext.Remove(entity);
             }
-        }
+
+            _dbContext.SaveChanges();
+            RefreshStats();
+        }, "An error occurred while trying to delete an entry.");
 
         private void ApplyFilterEvent(object sender, EventArgs e)
         {
@@ -211,26 +177,24 @@ namespace LicenceHub
         {
             try
             {
-                TabPage? tab = tabControl.SelectedTab;
-                DataGridView dataGridView = tab?.Controls.OfType<DataGridView>().FirstOrDefault()
-                    ?? throw new ArgumentException("No DataGridView found in the selected tab");
+                DataGridView view = GetCurrentDataGridView();
 
-                switch (tab.Name)
+                switch (tabControl.SelectedTab?.Name)
                 {
                     case "licensePage":
-                        dataGridView.DataSource = _dbContext.Licenses.Local.ToBindingList();
+                        view.DataSource = _dbContext.Licenses.Local.ToBindingList();
                         btnClearLicense.Enabled = false;
                         break;
                     case "supplierPage":
-                        dataGridView.DataSource = _dbContext.Suppliers.Local.ToBindingList();
+                        view.DataSource = _dbContext.Suppliers.Local.ToBindingList();
                         btnClearSupplier.Enabled = false;
                         break;
                     case "ownerPage":
-                        dataGridView.DataSource = _dbContext.Owners.Local.ToBindingList();
+                        view.DataSource = _dbContext.Owners.Local.ToBindingList();
                         btnClearOwner.Enabled = false;
                         break;
                     case "departmentPage":
-                        dataGridView.DataSource = _dbContext.Departments.Local.ToBindingList();
+                        view.DataSource = _dbContext.Departments.Local.ToBindingList();
                         btnClearOwner.Enabled = false;
                         break;
                     default:
@@ -310,35 +274,13 @@ namespace LicenceHub
 
         private void ApplyLicenseFilters()
         {
-            IEnumerable<License> query = DataGridViewExtensions.ApplyTextFilter(
-                _dbContext.Licenses.Local,
-                l => l.Title,
-                searchLicense.Text.Trim()
+            IEnumerable<License> query = _filterService.GetFilteredLicenses(
+                searchLicense.Text.Trim(),
+                comboOwner.SelectedValue as int?,
+                comboSupplier.SelectedValue as int?,
+                comboTypeLicense.SelectedText,
+                comboExpiration.SelectedText
             );
-
-            int? ownerId = comboOwner.SelectedValue as int?;
-            int? supplierId = comboSupplier.SelectedValue as int?;
-
-            if (Enum.TryParse<LicenseType>(comboTypeLicense.Text, out var type))
-            {
-                query = query.Where(l => l.Type == type);
-            }
-
-            if (Enum.TryParse<ExpirationStatus>(comboExpiration.Text, out var status))
-            {
-                query = query.Where(l => l.ExpirationStatus == status);
-            }
-
-            if (ownerId.HasValue && ownerId > 0)
-            {
-                query = query.Where(l => l.OwnerId == ownerId);
-            }
-
-
-            if (supplierId.HasValue && supplierId > 0)
-            {
-                query = query.Where(l => l.SupplierId == supplierId);
-            }
 
             DataGridViewExtensions.ApplyFilters(dataGridLicense, query);
             btnClearLicense.Enabled = true;
@@ -346,23 +288,10 @@ namespace LicenceHub
 
         private void ApplyOwnerFilters()
         {
-            IEnumerable<Owner> query = _dbContext.Owners.Local.AsEnumerable();
-
-            string txt = searchOwner.Text.Trim();
-            int? departmentId = comboDepartment.SelectedValue as int?;
-
-            if (!string.IsNullOrWhiteSpace(txt))
-            {
-                query = query.Where(s =>
-                    s.FirstName.ToLower().Contains(txt, StringComparison.OrdinalIgnoreCase) ||
-                    s.LastName.ToLower().Contains(txt, StringComparison.OrdinalIgnoreCase)
-                );
-            }
-
-            if (departmentId.HasValue && departmentId > 0)
-            {
-                query = query.Where(s => s.Department is not null && s.Department.Id == departmentId);
-            }
+            IEnumerable<Owner> query = _filterService.GetFilteredOwners(
+                searchOwner.Text.Trim(),
+                comboDepartment.SelectedValue as int?
+            );
 
             DataGridViewExtensions.ApplyFilters(dataGridOwner, query);
             btnClearOwner.Enabled = true;
@@ -370,26 +299,26 @@ namespace LicenceHub
 
         private void ApplySupplierFilters()
         {
-            IEnumerable<Supplier> query = DataGridViewExtensions.ApplyTextFilter(
-                _dbContext.Suppliers.Local,
-                s => s.Name,
-                searchSupplier.Text.Trim()
-            );
-
+            IEnumerable<Supplier> query = _filterService.GetFilteredSuppliers(searchSupplier.Text);
             DataGridViewExtensions.ApplyFilters(dataGridSupplier, query);
             btnClearSupplier.Enabled = true;
         }
 
         private void ApplyDepartmentFilters()
         {
-            IEnumerable<Department> query = DataGridViewExtensions.ApplyTextFilter(
-                _dbContext.Departments.Local,
-                d => d.Name,
-                searchDepartment.Text.Trim()
-            );
-
+            IEnumerable<Department> query = _filterService.GetFilteredDepartments(searchDepartment.Text);
             DataGridViewExtensions.ApplyFilters(dataGridDepartment, query);
             btnClearDepartment.Enabled = true;
+        }
+
+        private DataGridView GetCurrentDataGridView() =>
+            tabControl.SelectedTab?.Controls.OfType<DataGridView>().FirstOrDefault()
+            ?? throw new InvalidOperationException("No grid found");
+
+        private void ExecuteSafe(Action action, string errorMessage)
+        {
+            try { action(); }
+            catch (Exception ex) { MessageViewer.ShowError(errorMessage, ex.Message); }
         }
 
         private void PopulateDataGrids()
@@ -466,27 +395,9 @@ namespace LicenceHub
 
         private void LicenseCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (e.RowIndex >= 0 && dataGridLicense.Rows[e.RowIndex].DataBoundItem is License licence)
+            if (e.RowIndex >= 0 && dataGridLicense.Rows[e.RowIndex].DataBoundItem is License license)
             {
-                Color colorBg = Color.White;
-                Color colorFont = Color.Black;
-
-                switch (licence.ExpirationStatus)
-                {
-                    case ExpirationStatus.Expired:
-                        colorBg = Color.LightCoral;
-                        break;
-
-                    case ExpirationStatus.ExpiringSoon:
-                        colorBg = Color.LightGoldenrodYellow;
-                        break;
-
-                    default:
-                        break;
-                }
-
-                dataGridLicense.Rows[e.RowIndex].DefaultCellStyle.BackColor = colorBg;
-                dataGridLicense.Rows[e.RowIndex].DefaultCellStyle.ForeColor = colorFont;
+                DataGridViewExtensions.FormatLicenseCell(e, license);
             }
         }
     }

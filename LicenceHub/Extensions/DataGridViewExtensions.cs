@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using LicenseHub.Models;
+using System.ComponentModel;
+using License = LicenseHub.Models.License;
 
 namespace LicenseHub.Extensions
 {
@@ -19,17 +19,19 @@ namespace LicenseHub.Extensions
             IEnumerable<TEntity> query
             ) where TEntity : class
         {
-            grid.DataSource = new System.ComponentModel.BindingList<TEntity>(query.ToList());
+            grid.DataSource = new BindingList<TEntity>(query.ToList());
         }
 
-        public static IEnumerable<T> ApplyTextFilter<T>(
-            IEnumerable<T> source,
-            Func<T, string> selector,
-            string text)
+        public static void FormatLicenseCell(DataGridViewCellFormattingEventArgs e, License license)
         {
-            if (string.IsNullOrWhiteSpace(text)) return source;
-
-            return source.Where(x => selector(x).Contains(text, StringComparison.OrdinalIgnoreCase));
+            if (license.ExpirationStatus == ExpirationStatus.Expired)
+            {
+                e.CellStyle.BackColor = Color.LightCoral;
+            }
+            else if (license.ExpirationStatus == ExpirationStatus.ExpiringSoon)
+            {
+                e.CellStyle.BackColor = Color.LightGoldenrodYellow;
+            }
         }
     }
 }
