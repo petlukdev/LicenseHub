@@ -1,4 +1,6 @@
 ﻿using LicenseHub.DB;
+using LicenseHub.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 namespace LicenseHub.Services
 {
@@ -64,6 +66,36 @@ namespace LicenseHub.Services
                     _db.Entry(entity).CurrentValues.SetValues(_db.Entry(entity).OriginalValues);
                     throw ex.InnerException ?? ex;
                 }
+            }
+        }
+
+        public bool DeleteEntities(IEnumerable<object> entities)
+        {
+            try
+            {
+                foreach (var entity in entities) _db.Remove(entity);
+                _db.SaveChanges();
+                return true;
+            }
+            catch (InvalidOperationException ex)
+            {
+                RollbackDeletedEntities();
+                throw new InvalidOperationException(
+                    "An entry cannot be deleted! This entry is currently in use by another entity. Try deleting that entity first, if necessary."
+                );
+            }
+            catch (Exception ex)
+            {
+                RollbackDeletedEntities();
+                throw ex.InnerException ?? ex;
+            }
+        }
+
+        private void RollbackDeletedEntities()
+        {
+            foreach (var entry in _db.ChangeTracker.Entries().Where(x => x.State == EntityState.Deleted))
+            {
+                entry.State = EntityState.Unchanged;
             }
         }
     }

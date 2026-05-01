@@ -84,15 +84,15 @@ namespace LicenceHub
 
         private void DeleteEntryEvent(object sender, EventArgs e) => UIHelper.ExecuteSafe(() =>
         {
-            DataGridView view = UIHelper.GetCurrentDataGridView(tabControl);
+            DataGridView view = tabControl.GetCurrentDataGridView();
+            if (view.SelectedRows.Count == 0) return;
 
-            foreach (DataGridViewRow row in view.SelectedRows)
-            {
-                if (row.DataBoundItem is object entity) _dbContext.Remove(entity);
-            }
+            var entitiesToDelete = view.SelectedRows.Cast<DataGridViewRow>()
+                .Select(r => r.DataBoundItem)
+                .Where(item => item is not null)
+                .Cast<object>();
 
-            _dbContext.SaveChanges();
-            RefreshStats();
+            if (_dialogService.DeleteEntities(entitiesToDelete)) RefreshStats();
         }, "An error occurred while trying to delete an entry.");
 
         private void ApplyFilterEvent(object sender, EventArgs e) => UIHelper.ExecuteSafe(() =>
