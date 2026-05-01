@@ -1,8 +1,5 @@
 ﻿using LicenseHub.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LicenseHub.DB
 {
@@ -20,7 +17,7 @@ namespace LicenseHub.DB
             Directory.CreateDirectory(folder);
             string dbPath = Path.Combine(folder, "licensehub.db");
 
-            optionsBuilder.UseSqlite($"Data Source={dbPath}");
+            optionsBuilder.UseSqlite($"Data Source={dbPath};Foreign Keys=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -52,11 +49,13 @@ namespace LicenseHub.DB
 
                 entity.HasOne(e => e.Owner)
                       .WithMany(o => o.Licenses)
-                      .HasForeignKey(e => e.OwnerId);
+                      .HasForeignKey(e => e.OwnerId)
+                      .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(e => e.Supplier)
                       .WithMany(s => s.Licenses)
-                      .HasForeignKey(e => e.SupplierId);
+                      .HasForeignKey(e => e.SupplierId)
+                      .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Owner>(entity =>
@@ -78,7 +77,8 @@ namespace LicenseHub.DB
 
                 entity.HasOne(e => e.Department)
                       .WithMany(d => d.Owners)
-                      .HasForeignKey(e => e.DepartmentId);
+                      .HasForeignKey(e => e.DepartmentId)
+                      .OnDelete(DeleteBehavior.SetNull);
             });
 
             modelBuilder.Entity<Supplier>(entity =>
