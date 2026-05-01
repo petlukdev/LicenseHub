@@ -26,49 +26,44 @@ namespace LicenseHub.Forms
             txtNumber.Text = supplier.ContactPhone;
         }
 
-        private void ApplyEvent(object sender, EventArgs e)
+        private void ApplyEvent(object sender, EventArgs e) => UIHelper.ExecuteSafe(() =>
         {
-            try
-            {
-                string name = txtName.Text.Trim();
-                string email = txtEmail.Text.Trim();
-                string number = txtNumber.Text.Trim();
+            string name = txtName.Text.Trim();
+            string email = txtEmail.Text.Trim();
+            string number = txtNumber.Text.Trim();
 
-                if (string.IsNullOrEmpty(name))
-                    throw new ArgumentNullException(nameof(name));
-                if (string.IsNullOrEmpty(email))
-                    throw new ArgumentNullException(nameof(email));
-                if (string.IsNullOrEmpty(number))
-                    throw new ArgumentNullException(nameof(number));
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentNullException(nameof(name));
+            if (string.IsNullOrEmpty(email))
+                throw new ArgumentNullException(nameof(email));
+            if (string.IsNullOrEmpty(number))
+                throw new ArgumentNullException(nameof(number));
 
-                if (name.Length > 150)
-                    throw new ArgumentException("Name cannot be longer than 150 characters.", nameof(name));
-                if (email.Length > 255)
-                    throw new ArgumentException("Email cannot be longer than 255 characters.", nameof(email));
-                if (number.Length > 17)
-                    throw new ArgumentException("Number cannot be longer than 17 characters.", nameof(number));
+            if (name.Length > 150)
+                throw new ArgumentException("Name cannot be longer than 150 characters.", nameof(name));
+            if (email.Length > 255)
+                throw new ArgumentException("Email cannot be longer than 255 characters.", nameof(email));
+            if (number.Length > 17)
+                throw new ArgumentException("Number cannot be longer than 17 characters.", nameof(number));
 
-                Supplier supplier = _originalId == -1
-                    ? new Supplier { 
-                        Name = name, 
-                        ContactEmail = email, 
-                        ContactPhone = number 
-                    }
-                    : new Supplier { 
-                        Id = _originalId, 
-                        Name = name, 
-                        ContactEmail = email, 
-                        ContactPhone = number 
-                    };
+            Supplier supplier = _originalId == -1
+                ? new Supplier
+                {
+                    Name = name,
+                    ContactEmail = email,
+                    ContactPhone = number
+                }
+                : new Supplier
+                {
+                    Id = _originalId,
+                    Name = name,
+                    ContactEmail = email,
+                    ContactPhone = number
+                };
 
-                this.Result = supplier;
-                this.DialogResult = DialogResult.OK;
-            }
-            catch (Exception ex)
-            {
-                MessageViewer.ShowError("An error occurred while trying to make new supplier.", ex.Message);
-            }
-        }
+            this.Result = supplier;
+            this.DialogResult = DialogResult.OK;
+        }, "An error occurred while trying to make new supplier.");
 
         private void CancelEvent(object sender, EventArgs e)
         {

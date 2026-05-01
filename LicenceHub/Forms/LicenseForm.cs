@@ -58,18 +58,14 @@ namespace LicenseHub.Forms
             {
                 if (form.ShowDialog() != DialogResult.OK) return;
 
-                try
+                UIHelper.ExecuteSafe(() =>
                 {
                     Owner result = form.Result
                         ?? throw new ArgumentNullException(nameof(form.Result));
 
                     _owners.Add(result);
                     comboOwner.SelectedItem = result;
-                }
-                catch (Exception ex)
-                {
-                    MessageViewer.ShowError("An error occurred while trying to make new owner.", ex.Message);
-                }
+                }, "An error occurred while trying to make new owner.");
             }
         }
 
@@ -79,81 +75,70 @@ namespace LicenseHub.Forms
             {
                 if (form.ShowDialog() != DialogResult.OK) return;
 
-                try
+                UIHelper.ExecuteSafe(() =>
                 {
                     Supplier result = form.Result
                         ?? throw new ArgumentNullException(nameof(form.Result));
 
                     _suppliers.Add(result);
                     comboSupplier.SelectedItem = result;
-                }
-                catch (Exception ex)
-                {
-                    MessageViewer.ShowError("An error occurred while trying to make new supplier.", ex.Message);
-                }
+                }, "An error occurred while trying to make new supplier.");
             }
         }
 
-        private void ApplyEvent(object sender, EventArgs e)
+        private void ApplyEvent(object sender, EventArgs e) => UIHelper.ExecuteSafe(() =>
         {
-            try
-            {
-                string title = txtTitle.Text.Trim();
-                string key = txtKey.Text.Trim();
-                double cost = (double)numPrice.Value;
-                DateTime expirationDate = datePicker.Value;
+            string title = txtTitle.Text.Trim();
+            string key = txtKey.Text.Trim();
+            double cost = (double)numPrice.Value;
+            DateTime expirationDate = datePicker.Value;
 
-                if (string.IsNullOrEmpty(title))
-                    throw new ArgumentNullException(nameof(title));
-                if (string.IsNullOrEmpty(key))
-                    throw new ArgumentNullException(nameof(key));
-                if (double.IsNaN(cost))
-                    throw new ArgumentNullException(nameof(cost));
-                if (double.IsNegative(cost) || cost.Equals(0))
-                    throw new ArgumentException("Cost cannot be negative or zero.");
+            if (string.IsNullOrEmpty(title))
+                throw new ArgumentNullException(nameof(title));
+            if (string.IsNullOrEmpty(key))
+                throw new ArgumentNullException(nameof(key));
+            if (double.IsNaN(cost))
+                throw new ArgumentNullException(nameof(cost));
+            if (double.IsNegative(cost) || cost.Equals(0))
+                throw new ArgumentException("Cost cannot be negative or zero.");
 
-                if (title.Length > 150)
-                    throw new ArgumentException("First name cannot be longer than 150 characters.");
-                if (key.Length > 255)
-                    throw new ArgumentException("Last name cannot be longer than 255 characters.");
+            if (title.Length > 150)
+                throw new ArgumentException("First name cannot be longer than 150 characters.");
+            if (key.Length > 255)
+                throw new ArgumentException("Last name cannot be longer than 255 characters.");
 
-                if (comboType.SelectedItem is not LicenseType type)
-                    throw new InvalidOperationException("Type is not selected.");
-                if (comboOwner.SelectedItem is not Owner owner || owner.Id == -1)
-                    throw new InvalidOperationException("Owner is not selected.");
-                if (comboSupplier.SelectedItem is not Supplier supplier || supplier.Id == -1)
-                    throw new InvalidOperationException("Supplier is not selected.");
+            if (comboType.SelectedItem is not LicenseType type)
+                throw new InvalidOperationException("Type is not selected.");
+            if (comboOwner.SelectedItem is not Owner owner || owner.Id == -1)
+                throw new InvalidOperationException("Owner is not selected.");
+            if (comboSupplier.SelectedItem is not Supplier supplier || supplier.Id == -1)
+                throw new InvalidOperationException("Supplier is not selected.");
 
-                this.Result = _originalId == -1
-                    ? new License
-                    {
-                        Title = title,
-                        Key = key,
-                        Cost = cost,
-                        Type = type,
-                        ExpirationDate = expirationDate,
-                        Owner = owner,
-                        Supplier = supplier
-                    }
-                    : new License
-                    {
-                        Id = _originalId,
-                        Title = title,
-                        Key = key,
-                        Cost = cost,
-                        Type = type,
-                        ExpirationDate = expirationDate,
-                        Owner = owner,
-                        Supplier = supplier
-                    };
+            this.Result = _originalId == -1
+                ? new License
+                {
+                    Title = title,
+                    Key = key,
+                    Cost = cost,
+                    Type = type,
+                    ExpirationDate = expirationDate,
+                    Owner = owner,
+                    Supplier = supplier
+                }
+                : new License
+                {
+                    Id = _originalId,
+                    Title = title,
+                    Key = key,
+                    Cost = cost,
+                    Type = type,
+                    ExpirationDate = expirationDate,
+                    Owner = owner,
+                    Supplier = supplier
+                };
 
-                this.DialogResult = DialogResult.OK;
-            }
-            catch (Exception ex)
-            {
-                MessageViewer.ShowError("An error occurred while trying to make new license.", ex.Message);
-            }
-        }
+            this.DialogResult = DialogResult.OK;
+        }, "An error occurred while trying to make new license.");
 
         private void CancelEvent(object sender, EventArgs e)
         {
