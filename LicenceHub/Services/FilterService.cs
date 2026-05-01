@@ -1,7 +1,7 @@
 ﻿using LicenseHub.DB;
 using LicenseHub.Models;
 
-namespace LicenseHub.Helpers
+namespace LicenseHub.Services
 {
     public class FilterService
     {
