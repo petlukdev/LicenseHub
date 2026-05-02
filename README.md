@@ -19,9 +19,11 @@ A simple WinForms manager for storing and managing licenses or subscriptions
 
 ## 🗃️ Tech stack
 
-<img src="https://www.vectorlogo.zone/logos/dotnet/dotnet-official.svg" alt=".NET" height="100"/>
-<img src="https://raw.githubusercontent.com/campusMVP/dotnetCoreLogoPack/refs/heads/master/Entity%20Framework%20Core/Bitmap%20RGB/Bitmap-MEDIUM_Entity-Framework-Core-Logo_2colors_Square_Boxed_RGB.png" alt="EF Core" height="100"/>
-<img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg" alt="SQLite" height="100"/>
+<div>
+  <img src="https://www.vectorlogo.zone/logos/dotnet/dotnet-official.svg" alt=".NET" height="100"/>
+  <img src="https://raw.githubusercontent.com/campusMVP/dotnetCoreLogoPack/refs/heads/master/Entity%20Framework%20Core/Bitmap%20RGB/Bitmap-MEDIUM_Entity-Framework-Core-Logo_2colors_Square_Boxed_RGB.png" alt="EF Core" height="100"/>
+  <img src="https://icon.icepanel.io/Technology/png-shadow-512/SQLite.png" alt="SQLite" height="100"/>
+</div>
 
 ## ⚙️ Features
 
