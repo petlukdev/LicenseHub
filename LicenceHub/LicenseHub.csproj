@@ -7,6 +7,9 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>license.ico</ApplicationIcon>
+    <Copyright>@ 2026 Petr Lukáš</Copyright>
+    <Company>Petr Lukáš</Company>
+    <Description>A simple WinForms manager for storing and managing licenses or subscriptions</Description>
   </PropertyGroup>
 
   <ItemGroup>
